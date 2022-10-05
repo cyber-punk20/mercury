@@ -1,0 +1,1 @@
+#define NA_MY_MAX_ADDR_NAME 2048
