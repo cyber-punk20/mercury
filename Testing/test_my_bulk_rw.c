@@ -75,7 +75,7 @@ my_na_test_self_addr_publish(na_class_t *na_class, bool append, int mpi_rank)
     NA_TEST_CHECK_NA_ERROR(
         error, ret, "NA_Addr_free() failed (%s)", NA_Error_to_string(ret));
 
-    ret = my_na_test_set_config(addr_string, true);
+    ret = my_na_test_set_config(addr_string, append);
     NA_TEST_CHECK_NA_ERROR(error, ret, "my_na_test_set_config() failed (%s)",
         NA_Error_to_string(ret));
 
@@ -108,7 +108,7 @@ main(int argc, char *argv[]) {
     info_string_ptr = info_string;
     info_string_ptr += sprintf(info_string_ptr, "ofi+");
     info_string_ptr += sprintf(info_string_ptr, "verbs://");
-    NA_Initialize_opt(info_string, false, &hg_init_info.na_init_info);
+    hg_init_info.na_class = NA_Initialize_opt(info_string, false, &hg_init_info.na_init_info);
     my_na_test_self_addr_publish(hg_init_info.na_class, true, mpi_rank);
     
     hg_class_t * hg_class = HG_Init_opt(NULL, false, &hg_init_info);
