@@ -6,6 +6,7 @@
 #include "mercury_bulk.h"
 #include "mercury_request.h"
 #include "mercury_util.h"
+#include "mercury_macros.h"
 
 
 #include "na_mpi.h"
