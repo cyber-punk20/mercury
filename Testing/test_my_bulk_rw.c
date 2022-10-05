@@ -2,13 +2,14 @@
 
 #include "mercury_atomic.h"
 #include "mercury_time.h"
-
+#include "mercury.h"
+#include "mercury_util.h"
 
 #include "na_mpi.h"
 #include "na.h"
 #include "na_test.h"
 
-#include "mercury_util.h"
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -31,6 +32,28 @@
 
 
 #define HG_TEST_CONFIG_FILE_NAME "/myport.cfg"
+na_return_t
+my_na_test_set_config(const char *addr_name, bool append)
+{
+    FILE *config = NULL;
+    na_return_t ret;
+
+    config = fopen(
+        HG_TEST_TEMP_DIRECTORY HG_TEST_CONFIG_FILE_NAME, append ? "a" : "w");
+    NA_TEST_CHECK_ERROR(config == NULL, error, ret, NA_NOENTRY,
+        "Could not open config file from: %s",
+        HG_TEST_TEMP_DIRECTORY HG_TEST_CONFIG_FILE_NAME);
+
+    fprintf(config, "%s\n", addr_name);
+    fclose(config);
+
+    return NA_SUCCESS;
+
+error:
+    return ret;
+}
+
+
 static na_return_t
 my_na_test_self_addr_publish(na_class_t *na_class, bool append, int mpi_rank)
 {
@@ -52,7 +75,7 @@ my_na_test_self_addr_publish(na_class_t *na_class, bool append, int mpi_rank)
     NA_TEST_CHECK_NA_ERROR(
         error, ret, "NA_Addr_free() failed (%s)", NA_Error_to_string(ret));
 
-    ret = my_na_test_set_config(addr_string, append);
+    ret = my_na_test_set_config(addr_string, true);
     NA_TEST_CHECK_NA_ERROR(error, ret, "my_na_test_set_config() failed (%s)",
         NA_Error_to_string(ret));
 
@@ -65,26 +88,7 @@ error:
     return ret;
 }
 
-na_return_t
-my_na_test_set_config(const char *addr_name, bool append)
-{
-    FILE *config = NULL;
-    na_return_t ret;
 
-    config = fopen(
-        HG_TEST_TEMP_DIRECTORY HG_TEST_CONFIG_FILE_NAME, append ? "a" : "w");
-    NA_TEST_CHECK_ERROR(config == NULL, error, ret, NA_NOENTRY,
-        "Could not open config file from: %s",
-        HG_TEST_TEMP_DIRECTORY HG_TEST_CONFIG_FILE_NAME);
-
-    fprintf(config, "%s\n", addr_name);
-    fclose(config);
-
-    return NA_SUCCESS;
-
-error:
-    return ret;
-}
 
 int
 main(int argc, char *argv[]) {
