@@ -105,6 +105,14 @@ extern HG_PRIVATE HG_LOG_OUTLET_DECL(hg_test);
         fflush(stdout);                                                        \
     } while (0)
 
+#define NA_TEST_CHECK_ERROR_NORET(cond, label, ...)                            \
+    do {                                                                       \
+        if (unlikely(cond)) {                                                  \
+            NA_TEST_LOG_ERROR(__VA_ARGS__);                                    \
+            goto label;                                                        \
+        }                                                                      \
+    } while (0)
+
 #ifdef HG_HAS_BOOST
 /* Generate processor and struct for required input/output structs
  * MERCURY_GEN_PROC( struct_type_name, fields )
