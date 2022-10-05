@@ -34,6 +34,7 @@
 #endif
 
 #define MY_HG_TEST_CONFIG_FILE_NAME "/myport.cfg"
+#defind TEST_BUFF_SIZE 1024 * 1024 * 1024
 
 struct my_hg_test_bulk_args {
     hg_handle_t handle;
@@ -356,6 +357,14 @@ my_na_test_get_target_addrs(hg_class_t* hg_class, int mpi_rank, int nNode, hg_ad
         target_addrs[i] = (hg_addr_t*) malloc(sizeof(hg_addr_t));
         ret = HG_Addr_lookup2(hg_class, target_addr_names[i], target_addrs[i]);
     }
+    for(int i = 0; i < nNode; i++) {
+        if(target_addr_names[i] != NULL) {
+            free(target_addr_names[i]);
+        }
+    }
+    if(target_addr_names != NULL) {
+        free(target_addr_names);
+    }
     return ret;
 }
 
@@ -364,6 +373,7 @@ my_na_test_get_target_addrs(hg_class_t* hg_class, int mpi_rank, int nNode, hg_ad
 int
 main(int argc, char *argv[]) {
     int mpi_rank, nNode;
+    int test_size = TEST_BUFF_SIZE;
     MPI_Init(NULL, NULL);
 	MPI_Comm_size(MPI_COMM_WORLD, &nNode);
 	MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank);
@@ -386,8 +396,69 @@ main(int argc, char *argv[]) {
     hg_context_t *context = HG_Context_create(hg_class);
     // Register
     my_hg_test_register(hg_class);
-    // 
+    /* Prepare bulk_buf */
+    char **bulk_bufs;
+    char ***bulk_bufs_ptr;
+    size_t *buf_sizes;
+    size_t nbytes = test_size;
+    bulk_bufs = (char **)malloc((nNode - 1) * sizeof(char));
+    HG_TEST_CHECK_ERROR(bulk_buf == NULL, done, ret, HG_NOMEM_ERROR,
+        "Could not allocate bulk bufs");
+    for(int i = 0; i < nNode - 1; i++) {
+        bulk_bufs[i] = (char *)malloc(nbytes * sizeof(char));
+        HG_TEST_CHECK_ERROR(bulk_buf[i] == NULL, done, ret, HG_NOMEM_ERROR,
+        "Could not allocate bulk bufs[%d]", i);
+    }
+    for (int i = 0; i < nNode - 1; i++)
+        for(int j = 0; j < nbytes; j++) {
+            bulk_bufs[i][j] = (char) i;
+        }
+    }
+    bulk_bufs_ptr = (void ***) &bulk_bufs;
+    buf_sizes = &nbytes;
+    /* Get target addrs */
+    hg_addr_t** target_addrs;
+    na_return_t ret = my_na_test_get_target_addrs(hg_class, mpi_rank, nNode, target_addrs);
+    /* Create handles */
+    
+    int nhandles = nNode - 1;
+    handles = malloc(nhandles * sizeof(hg_handle_t));
+    for (int i = 0; i < nhandles; i++) {
+        ret = HG_Create(context, target_addrs[i],
+            my_hg_test_bulk_write_id_g, &handles[i]);
+        HG_TEST_CHECK_HG_ERROR(
+            done, ret, "HG_Create() failed (%s)", HG_Error_to_string(ret));
+    }
+    /* Register memory */
+    hg_bulk_t* bulk_handles = malloc(nhandles * sizeof(hg_bulk_t));
+    for(int i = 0; i < nhandles; i++) {
+        bulk_handles[i] = HG_BULK_NULL;
+    }
+    for(int i = 0; i < nhandles; i++) {
+        ret = HG_Bulk_create(hg_class, 1, bulk_bufs_ptr[i],
+        (hg_size_t *) buf_sizes, HG_BULK_READ_ONLY, &bulk_handles[i]);
+    }
+    HG_TEST_CHECK_HG_ERROR(
+        done, ret, "HG_Bulk_create() failed (%s)", HG_Error_to_string(ret));
 
+    
+
+    for (int i = 0; i < nhandles; i++) {
+        my_bulk_write_in_t in_struct;
+        /* Fill input structure */
+        in_struct.fildes = 0;
+        in_struct.bulk_handle = bulk_handles[i];
+    // again:
+        ret = HG_Forward(
+            handles[j], hg_test_bulk_write_cb, &args, &in_struct);
+        // if (ret == HG_AGAIN) {
+        //     hg_request_wait(request, 0, NULL);
+        //     goto again;
+        // }
+        HG_TEST_CHECK_HG_ERROR(
+            done, ret, "HG_Forward() failed (%s)", HG_Error_to_string(ret));
+    }
+done:
 error:
     free(info_string);
 
