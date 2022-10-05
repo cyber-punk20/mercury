@@ -1,4 +1,4 @@
-#include "my_test_bulk_rw.h"
+#include "test_my_bulk_rw.h"
 
 #include "mercury_atomic.h"
 #include "mercury_time.h"

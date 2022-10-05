@@ -390,6 +390,9 @@ build_mercury_test(read_bw)
 
 build_mercury_test(kill)
 
+# my tests
+build_mercury_test(my_bulk_rw)
+
 # Cray DRC test
 if(NA_OFI_TESTING_USE_CRAY_DRC)
   build_mercury_test(drc_auth)
