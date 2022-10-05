@@ -291,10 +291,9 @@ error:
 
 
 na_return_t
-my_na_test_get_config(char **addr_names, size_t len, int mpi_rank, int nNode)
+my_na_test_get_config(char **addr_names, size_t len, int nNode)
 {
     FILE *config = NULL;
-    char *s;
     na_return_t ret;
     int rc;
     ssize_t read;
@@ -309,7 +308,7 @@ my_na_test_get_config(char **addr_names, size_t len, int mpi_rank, int nNode)
     for(int i = 0; i < nNode; i++) {
         char* line = NULL;
         char* addr_name = NULL;
-        read = getline(&line, &len, fp);
+        read = getline(&line, &len, config);
         
         NA_TEST_CHECK_ERROR(
         read == -1, error, ret, NA_NOENTRY, "Could not retrieve config name");
@@ -321,7 +320,7 @@ my_na_test_get_config(char **addr_names, size_t len, int mpi_rank, int nNode)
         /* This prevents retaining the newline, if any */
         addr_name[strlen(addr_name) - 1] = '\0';
         addr_names[rank] = addr_name;
-        free(line)
+        free(line);
     }
     
 
@@ -350,7 +349,7 @@ error:
 na_return_t
 my_na_test_get_target_addrs(hg_class_t* hg_class, int mpi_rank, int nNode, hg_addr_t** target_addrs) {
     char** target_addr_names = NULL;
-    na_return_t ret = my_na_test_get_config(target_addr_names, NA_MY_MAX_ADDR_NAME, mpi_rank, nNode);
+    na_return_t ret = my_na_test_get_config(target_addr_names, NA_MY_MAX_ADDR_NAME, nNode);
     target_addrs =  (hg_addr_t**) malloc(sizeof(hg_addr_t*) * (nNode - 1));
     for(int i = 0; i < nNode; i++) {
         if(i == mpi_rank) continue;
