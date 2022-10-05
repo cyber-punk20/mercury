@@ -104,7 +104,15 @@ extern HG_PRIVATE HG_LOG_OUTLET_DECL(hg_test);
         fflush(stdout);                                                        \
     } while (0)
 
-
+#ifdef HG_HAS_BOOST
+/* Generate processor and struct for required input/output structs
+ * MERCURY_GEN_PROC( struct_type_name, fields )
+ */
+MERCURY_GEN_PROC(my_bulk_write_in_t,
+    ((hg_int32_t)(fildes))((hg_size_t)(transfer_size))((hg_size_t)(
+        origin_offset))((hg_size_t)(target_offset))((hg_bulk_t)(bulk_handle)))
+MERCURY_GEN_PROC(bulk_write_out_t, ((hg_size_t)(ret)))
+#else
 /* Define my_bulk_write_in_t */
 typedef struct {
     hg_int32_t fildes;
