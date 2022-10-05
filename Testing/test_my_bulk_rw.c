@@ -32,9 +32,12 @@
 #    endif
 #endif
 
+#ifdef HG_HAS_DEBUG
 #    define HG_TEST_LOG_DEBUG(...)                                             \
         HG_LOG_WRITE(hg_test, HG_LOG_LEVEL_DEBUG, __VA_ARGS__)
-
+#else
+#    define HG_TEST_LOG_DEBUG(...) (void) 0
+#endif
 #define HG_TEST_CONFIG_FILE_NAME "/myport.cfg"
 
 struct my_hg_test_bulk_args {
