@@ -32,7 +32,8 @@
 #    endif
 #endif
 
-
+#    define HG_TEST_LOG_DEBUG(...)                                             \
+        HG_LOG_WRITE(hg_test, HG_LOG_LEVEL_DEBUG, __VA_ARGS__)
 
 #define HG_TEST_CONFIG_FILE_NAME "/myport.cfg"
 
