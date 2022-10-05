@@ -1,6 +1,11 @@
 #ifndef TEST_MY_BULK_RW_H
 #define TEST_MY_BULK_RW_H
 #define NA_MY_MAX_ADDR_NAME 2048
+#include "mercury.h"
+#include "mercury_bulk.h"
+#include "mercury_request.h"
+#include "mercury_util.h"
+
 
 extern HG_PRIVATE HG_LOG_OUTLET_DECL(hg_test);
 #define HG_TEST_LOG_ERROR(...)                                                 \
