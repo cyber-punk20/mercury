@@ -34,7 +34,7 @@
 #endif
 
 #define MY_HG_TEST_CONFIG_FILE_NAME "/myport.cfg"
-#defind TEST_BUFF_SIZE 1024 * 1024 * 1024
+#define TEST_BUFF_SIZE 1024 * 1024 * 1024
 
 struct my_hg_test_bulk_args {
     hg_handle_t handle;
