@@ -6,6 +6,7 @@
 
 #include "na_mpi.h"
 #include "na.h"
+#include "na_test.h"
 
 #include "mercury_util.h"
 
@@ -42,7 +43,7 @@ my_na_test_self_addr_publish(na_class_t *na_class, bool append, int mpi_rank)
     NA_TEST_CHECK_NA_ERROR(
         error, ret, "NA_Addr_self() failed (%s)", NA_Error_to_string(ret));
     
-    sprintf(addr_string, "%d: ", i);
+    sprintf(addr_string, "%d: ", mpi_rank);
     ret = NA_Addr_to_string(na_class, addr_string + strlen(addr_string), &addr_string_len, self_addr);
     NA_TEST_CHECK_NA_ERROR(
         error, ret, "NA_Addr_to_string() failed (%s)", NA_Error_to_string(ret));
