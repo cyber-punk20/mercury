@@ -8,6 +8,7 @@
 /* Default error macro */
 #include "mercury_log.h"
 
+#include "mercury_macros.h"
 
 extern HG_PRIVATE HG_LOG_OUTLET_DECL(hg_test);
 #define HG_TEST_LOG_ERROR(...)                                                 \
