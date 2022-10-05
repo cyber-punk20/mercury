@@ -317,4 +317,8 @@ main(int argc, char *argv[]) {
     hg_context_t *context = HG_Context_create(hg_class);
     // Register
     my_hg_test_register(hg_class);
+error:
+    free(info_string);
+
+    return NULL;
 }
