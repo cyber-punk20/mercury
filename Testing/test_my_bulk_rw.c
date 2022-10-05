@@ -32,6 +32,218 @@
 
 
 #define HG_TEST_CONFIG_FILE_NAME "/myport.cfg"
+
+struct my_hg_test_bulk_args {
+    hg_handle_t handle;
+    hg_size_t nbytes;
+    ssize_t ret;
+    int fildes;
+    hg_size_t transfer_size;
+    hg_size_t origin_offset;
+    hg_size_t target_offset;
+};
+
+
+/* test_bulk */
+hg_id_t my_hg_test_bulk_write_id_g = 0;
+/* Define my_bulk_write_in_t */
+typedef struct {
+    hg_int32_t fildes;
+    hg_size_t transfer_size;
+    hg_size_t origin_offset;
+    hg_size_t target_offset;
+    hg_bulk_t bulk_handle;
+} my_bulk_write_in_t;
+/* Define my_bulk_write_out_t */
+typedef struct {
+    hg_size_t ret;
+} my_bulk_write_out_t;
+
+
+static HG_INLINE size_t
+my_bulk_read(int fildes, const void *buf, size_t offset, size_t start_value,
+    size_t nbyte, int verbose)
+{
+    size_t i;
+    int error = 0;
+    const char *buf_ptr = (const char *) buf;
+    (void) fildes;
+
+    if (verbose)
+        HG_TEST_LOG_DEBUG("Executing bulk_write with fildes %d...", fildes);
+
+    if (nbyte == 0)
+        return nbyte;
+
+    if (verbose)
+        HG_TEST_LOG_DEBUG("Checking data...");
+
+    /* Check bulk buf */
+    for (i = offset; i < nbyte + offset; i++) {
+        if (buf_ptr[i] != (char) (i + start_value)) {
+            HG_TEST_LOG_ERROR("Error detected in bulk transfer, buf[%zu] = %d, "
+                              "was expecting %d!\n",
+                i, (char) buf_ptr[i], (char) (i + start_value));
+            error = 1;
+            nbyte = 0;
+            break;
+        }
+    }
+    if (!error && verbose)
+        HG_TEST_LOG_DEBUG("Successfully transfered %zu bytes!", nbyte);
+    return nbyte;
+}
+
+// after target pulled data
+// origin read from target and check data
+static hg_return_t
+my_hg_test_bulk_transfer_cb(const struct hg_cb_info *hg_cb_info)
+{
+    struct my_hg_test_bulk_args *bulk_args =
+        (struct my_hg_test_bulk_args *) hg_cb_info->arg;
+    hg_bulk_t local_bulk_handle = hg_cb_info->info.bulk.local_handle;
+    hg_bulk_t origin_bulk_handle = hg_cb_info->info.bulk.origin_handle;
+    hg_return_t ret = HG_SUCCESS;
+    my_bulk_write_out_t out_struct;
+    void *buf;
+    size_t write_ret;
+
+    if (hg_cb_info->ret == HG_CANCELED) {
+        HG_TEST_LOG_DEBUG("HG_Bulk_transfer() was canceled\n");
+        /* Fill output structure */
+        out_struct.ret = 0;
+        goto done;
+    } else
+        HG_TEST_CHECK_ERROR_NORET(hg_cb_info->ret != HG_SUCCESS, done,
+            "Error in HG callback (%s)", HG_Error_to_string(hg_cb_info->ret));
+
+    ret = HG_Bulk_access(local_bulk_handle, 0, bulk_args->nbytes,
+        HG_BULK_READ_ONLY, 1, &buf, NULL, NULL);
+    HG_TEST_CHECK_HG_ERROR(
+        done, ret, "HG_Bulk_access() failed (%s)", HG_Error_to_string(ret));
+
+    /* Call bulk_read */
+    write_ret = my_bulk_read(bulk_args->fildes, buf, bulk_args->target_offset,
+        bulk_args->origin_offset - bulk_args->target_offset,
+        bulk_args->transfer_size, 1);
+
+    /* Fill output structure */
+    out_struct.ret = write_ret;
+
+done:
+    /* Free block handle */
+    ret = HG_Bulk_free(local_bulk_handle);
+    HG_TEST_CHECK_ERROR_DONE(ret != HG_SUCCESS, "HG_Bulk_free() failed (%s)",
+        HG_Error_to_string(ret));
+
+    ret = HG_Bulk_free(origin_bulk_handle);
+    HG_TEST_CHECK_ERROR_DONE(ret != HG_SUCCESS, "HG_Bulk_free() failed (%s)",
+        HG_Error_to_string(ret));
+
+    /* Send response back */
+    ret = HG_Respond(bulk_args->handle, NULL, NULL, &out_struct);
+    HG_TEST_CHECK_ERROR_DONE(
+        ret != HG_SUCCESS, "HG_Respond() failed (%s)", HG_Error_to_string(ret));
+
+    ret = HG_Destroy(bulk_args->handle);
+    HG_TEST_CHECK_ERROR_DONE(
+        ret != HG_SUCCESS, "HG_Destroy() failed (%s)", HG_Error_to_string(ret));
+
+    free(bulk_args);
+
+    return ret;
+}
+
+// origin -> write rpc -> target
+// target callback
+hg_return_t my_hg_test_bulk_write_cb(hg_handle_t handle) {
+    const struct hg_info *hg_info = NULL;
+    hg_bulk_t origin_bulk_handle = HG_BULK_NULL;
+    hg_bulk_t local_bulk_handle = HG_BULK_NULL;
+    struct my_hg_test_bulk_args *bulk_args = NULL;
+    my_bulk_write_in_t in_struct;
+    hg_return_t ret = HG_SUCCESS;
+    int fildes;
+    hg_op_id_t hg_bulk_op_id;
+
+    bulk_args =
+        (struct my_hg_test_bulk_args *) malloc(sizeof(struct my_hg_test_bulk_args));
+    HG_TEST_CHECK_ERROR(bulk_args == NULL, error, ret, HG_NOMEM_ERROR,
+        "Could not allocate bulk_args");
+
+    /* Keep handle to pass to callback */
+    bulk_args->handle = handle;
+
+    /* Get info from handle */
+    hg_info = HG_Get_info(handle);
+
+    /* Get input parameters and data */
+    ret = HG_Get_input(handle, &in_struct);
+    HG_TEST_CHECK_HG_ERROR(
+        error, ret, "HG_Get_input() failed (%s)", HG_Error_to_string(ret));
+
+    /* Get parameters */
+    fildes = in_struct.fildes;
+    origin_bulk_handle = in_struct.bulk_handle;
+
+    bulk_args->nbytes = HG_Bulk_get_size(origin_bulk_handle);
+    bulk_args->transfer_size = in_struct.transfer_size;
+    bulk_args->origin_offset = in_struct.origin_offset;
+    bulk_args->target_offset = in_struct.target_offset;
+    bulk_args->fildes = fildes;
+
+    ret = HG_Bulk_ref_incr(origin_bulk_handle);
+    HG_TEST_CHECK_HG_ERROR(
+        error, ret, "HG_Bulk_ref_incr() failed (%s)", HG_Error_to_string(ret));
+
+    /* Free input */
+    ret = HG_Free_input(handle, &in_struct);
+    HG_TEST_CHECK_HG_ERROR(
+        error, ret, "HG_Free_input() failed (%s)", HG_Error_to_string(ret));
+
+    /* Create a new block handle to write the data */
+    ret = HG_Bulk_create(hg_info->hg_class, 1, NULL,
+        (hg_size_t *) &bulk_args->nbytes, HG_BULK_READWRITE,
+        &local_bulk_handle);
+    HG_TEST_CHECK_HG_ERROR(
+        error, ret, "HG_Bulk_create() failed (%s)", HG_Error_to_string(ret));
+
+    /* Pull bulk data */
+    HG_TEST_LOG_DEBUG("Requesting transfer_size=%" PRIu64
+                      ", origin_offset=%" PRIu64 ", "
+                      "target_offset=%" PRIu64,
+        bulk_args->transfer_size, bulk_args->origin_offset,
+        bulk_args->target_offset);
+    ret = HG_Bulk_transfer_id(hg_info->context, hg_test_bulk_transfer_cb,
+        bulk_args, HG_BULK_PULL, hg_info->addr, hg_info->context_id,
+        origin_bulk_handle, bulk_args->origin_offset, local_bulk_handle,
+        bulk_args->target_offset, bulk_args->transfer_size, &hg_bulk_op_id);
+    HG_TEST_CHECK_HG_ERROR(error, ret, "HG_Bulk_transfer_id() failed (%s)",
+        HG_Error_to_string(ret));
+
+    /* Test HG_Bulk_Cancel() */
+    if (fildes < 0) {
+        ret = HG_Bulk_cancel(hg_bulk_op_id);
+        HG_TEST_CHECK_HG_ERROR(error, ret, "HG_Bulk_cancel() failed (%s)",
+            HG_Error_to_string(ret));
+    }
+
+    return ret;
+
+error:
+    ret = HG_Destroy(handle);
+    HG_TEST_CHECK_ERROR_DONE(
+        ret != HG_SUCCESS, "HG_Destroy() failed (%s)", HG_Error_to_string(ret));
+
+    return ret;
+}
+
+static void
+my_hg_test_register(hg_class_t *hg_class) {
+    my_hg_test_bulk_write_id_g = MERCURY_REGISTER(hg_class, "my_hg_test_bulk_write",
+        my_bulk_write_in_t, my_bulk_write_out_t, my_hg_test_bulk_write_cb);
+}
+
 na_return_t
 my_na_test_set_config(const char *addr_name, bool append)
 {
@@ -96,9 +308,9 @@ main(int argc, char *argv[]) {
     MPI_Init(NULL, NULL);
 	MPI_Comm_size(MPI_COMM_WORLD, &nNode);
 	MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank);
-    // initialization
+    // Initialization
     struct hg_init_info hg_init_info = HG_INIT_INFO_INITIALIZER;
-    // NA intialization
+    // NA intialization (na_test.c)
     hg_init_info.na_init_info.progress_mode = NA_NO_BLOCK;
     char *info_string = NULL, *info_string_ptr = NULL;
     info_string = (char *) malloc(sizeof(char) * NA_MY_MAX_ADDR_NAME);
@@ -109,7 +321,10 @@ main(int argc, char *argv[]) {
     info_string_ptr += sprintf(info_string_ptr, "verbs://");
     hg_init_info.na_class = NA_Initialize_opt(info_string, false, &hg_init_info.na_init_info);
     my_na_test_self_addr_publish(hg_init_info.na_class, true, mpi_rank);
-    
+    MPI_Barrier(MPI_COMM_WORLD);
+    // HG intialization (mercury_test.c)
     hg_class_t * hg_class = HG_Init_opt(NULL, false, &hg_init_info);
-
+    hg_context_t *context = HG_Context_create(hg_class);
+    // Register
+    my_hg_test_register(hg_class);
 }
