@@ -5,6 +5,8 @@
 #include "mercury_bulk.h"
 #include "mercury_request.h"
 #include "mercury_util.h"
+/* Default error macro */
+#include "mercury_log.h"
 
 
 extern HG_PRIVATE HG_LOG_OUTLET_DECL(hg_test);
