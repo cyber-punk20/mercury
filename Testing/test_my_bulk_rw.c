@@ -32,13 +32,7 @@
 #    endif
 #endif
 
-#ifdef HG_HAS_DEBUG
-#    define HG_TEST_LOG_DEBUG(...)                                             \
-        HG_LOG_WRITE(hg_test, HG_LOG_LEVEL_DEBUG, __VA_ARGS__)
-#else
-#    define HG_TEST_LOG_DEBUG(...) (void) 0
-#endif
-#define HG_TEST_CONFIG_FILE_NAME "/myport.cfg"
+#define MY_HG_TEST_CONFIG_FILE_NAME "/myport.cfg"
 
 struct my_hg_test_bulk_args {
     hg_handle_t handle;
@@ -221,7 +215,7 @@ hg_return_t my_hg_test_bulk_write_cb(hg_handle_t handle) {
                       "target_offset=%" PRIu64,
         bulk_args->transfer_size, bulk_args->origin_offset,
         bulk_args->target_offset);
-    ret = HG_Bulk_transfer_id(hg_info->context, hg_test_bulk_transfer_cb,
+    ret = HG_Bulk_transfer_id(hg_info->context, my_hg_test_bulk_transfer_cb,
         bulk_args, HG_BULK_PULL, hg_info->addr, hg_info->context_id,
         origin_bulk_handle, bulk_args->origin_offset, local_bulk_handle,
         bulk_args->target_offset, bulk_args->transfer_size, &hg_bulk_op_id);
@@ -258,10 +252,10 @@ my_na_test_set_config(const char *addr_name, bool append)
     na_return_t ret;
 
     config = fopen(
-        HG_TEST_TEMP_DIRECTORY HG_TEST_CONFIG_FILE_NAME, append ? "a" : "w");
+        HG_TEST_TEMP_DIRECTORY MY_HG_TEST_CONFIG_FILE_NAME, append ? "a" : "w");
     NA_TEST_CHECK_ERROR(config == NULL, error, ret, NA_NOENTRY,
         "Could not open config file from: %s",
-        HG_TEST_TEMP_DIRECTORY HG_TEST_CONFIG_FILE_NAME);
+        HG_TEST_TEMP_DIRECTORY MY_HG_TEST_CONFIG_FILE_NAME);
 
     fprintf(config, "%s\n", addr_name);
     fclose(config);
@@ -321,7 +315,7 @@ main(int argc, char *argv[]) {
     hg_init_info.na_init_info.progress_mode = NA_NO_BLOCK;
     char *info_string = NULL, *info_string_ptr = NULL;
     info_string = (char *) malloc(sizeof(char) * NA_MY_MAX_ADDR_NAME);
-    // NA_TEST_CHECK_ERROR_NORET(info_string == NULL, error, "Could not allocate info string");
+    NA_TEST_CHECK_ERROR_NORET(info_string == NULL, error, "Could not allocate info string");
     memset(info_string, '\0', NA_MY_MAX_ADDR_NAME);
     info_string_ptr = info_string;
     info_string_ptr += sprintf(info_string_ptr, "ofi+");
