@@ -102,8 +102,7 @@ main(int argc, char *argv[]) {
     hg_init_info.na_init_info.progress_mode = NA_NO_BLOCK;
     char *info_string = NULL, *info_string_ptr = NULL;
     info_string = (char *) malloc(sizeof(char) * NA_MY_MAX_ADDR_NAME);
-    NA_TEST_CHECK_ERROR_NORET(
-        info_string == NULL, error, "Could not allocate info string");
+    // NA_TEST_CHECK_ERROR_NORET(info_string == NULL, error, "Could not allocate info string");
     memset(info_string, '\0', NA_MY_MAX_ADDR_NAME);
     info_string_ptr = info_string;
     info_string_ptr += sprintf(info_string_ptr, "ofi+");
