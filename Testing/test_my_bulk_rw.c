@@ -3,7 +3,10 @@
 #include "mercury_atomic.h"
 #include "mercury_time.h"
 #include "mercury.h"
+#include "mercury_bulk.h"
+#include "mercury_request.h"
 #include "mercury_util.h"
+
 
 #include "na_mpi.h"
 #include "na.h"
