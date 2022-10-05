@@ -7,6 +7,26 @@
 #include "na_mpi.h"
 #include "na.h"
 
+#include "mercury_util.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#ifdef _WIN32
+#    include <Winsock2.h>
+#    include <Ws2tcpip.h>
+#else
+#    include <arpa/inet.h>
+#    include <netdb.h>
+#    include <netinet/in.h>
+#    include <sys/socket.h>
+#    include <sys/types.h>
+#    include <unistd.h>
+#    if defined(HG_TEST_HAS_SYSPRCTL_H)
+#        include <sys/prctl.h>
+#    endif
+#endif
+
 
 
 #define HG_TEST_CONFIG_FILE_NAME "/myport.cfg"
