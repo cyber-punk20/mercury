@@ -108,8 +108,8 @@ main(int argc, char *argv[]) {
     info_string_ptr = info_string;
     info_string_ptr += sprintf(info_string_ptr, "ofi+");
     info_string_ptr += sprintf(info_string_ptr, "verbs://");
-    NA_Initialize_opt(info_string, false, hg_init_info.na_class);
-    my_na_test_self_addr_publish(hg_init_info.na_class, true);
+    NA_Initialize_opt(info_string, false, &hg_init_info.na_init_info);
+    my_na_test_self_addr_publish(hg_init_info.na_class, true, mpi_rank);
     
     hg_class_t * hg_class = HG_Init_opt(NULL, false, &hg_init_info);
 
