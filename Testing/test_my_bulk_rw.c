@@ -255,7 +255,6 @@ error:
     return ret;
 }
 
-
 static na_return_t
 my_na_test_self_addr_publish(na_class_t *na_class, bool append, int mpi_rank)
 {
@@ -268,7 +267,7 @@ my_na_test_self_addr_publish(na_class_t *na_class, bool append, int mpi_rank)
     NA_TEST_CHECK_NA_ERROR(
         error, ret, "NA_Addr_self() failed (%s)", NA_Error_to_string(ret));
     
-    sprintf(addr_string, "%d: ", mpi_rank);
+    sprintf(addr_string, "%d#", mpi_rank);
     ret = NA_Addr_to_string(na_class, addr_string + strlen(addr_string), &addr_string_len, self_addr);
     NA_TEST_CHECK_NA_ERROR(
         error, ret, "NA_Addr_to_string() failed (%s)", NA_Error_to_string(ret));
@@ -287,6 +286,77 @@ error:
     if (self_addr != NA_ADDR_NULL)
         (void) NA_Addr_free(na_class, self_addr);
 
+    return ret;
+}
+
+
+na_return_t
+my_na_test_get_config(char **addr_names, size_t len, int mpi_rank, int nNode)
+{
+    FILE *config = NULL;
+    char *s;
+    na_return_t ret;
+    int rc;
+    ssize_t read;
+    config = fopen(HG_TEST_TEMP_DIRECTORY MY_HG_TEST_CONFIG_FILE_NAME, "r");
+    NA_TEST_CHECK_ERROR(config == NULL, error, ret, NA_NOENTRY,
+        "Could not open config file from: %s",
+        HG_TEST_TEMP_DIRECTORY MY_HG_TEST_CONFIG_FILE_NAME);
+    if(addr_names == NULL) {
+        addr_names = (char **) malloc(sizeof(char*) * nNode);
+        NA_TEST_CHECK_ERROR_NORET(addr_names == NULL, error, "Could not allocate addr_names");
+    }
+    for(int i = 0; i < nNode; i++) {
+        char* line = NULL;
+        char* addr_name = NULL;
+        read = getline(&line, &len, fp);
+        
+        NA_TEST_CHECK_ERROR(
+        read == -1, error, ret, NA_NOENTRY, "Could not retrieve config name");
+        NA_TEST_CHECK_ERROR_NORET(line == NULL, error, "Could not allocate line");
+        addr_name = (char *) malloc(sizeof(char) * len);
+        NA_TEST_CHECK_ERROR_NORET(addr_name == NULL, error, "Could not allocate addr_name");
+        int rank = 0;
+        sscanf(line, "%d#%s", &rank, addr_name);
+        /* This prevents retaining the newline, if any */
+        addr_name[strlen(addr_name) - 1] = '\0';
+        addr_names[rank] = addr_name;
+        free(line)
+    }
+    
+
+    rc = fclose(config);
+    config = NULL;
+    NA_TEST_CHECK_ERROR(
+        rc != 0, error, ret, NA_PROTOCOL_ERROR, "fclose() failed");
+
+    return NA_SUCCESS;
+
+error:
+    if (config != NULL)
+        fclose(config);
+    for(int i = 0; i < nNode; i++) {
+        if(addr_names[i] != NULL) {
+            free(addr_names[i]);
+        }
+    }
+    if(addr_names != NULL) {
+        free(addr_names);
+    }
+    return ret;
+}
+
+
+na_return_t
+my_na_test_get_target_addrs(hg_class_t* hg_class, int mpi_rank, int nNode, hg_addr_t** target_addrs) {
+    char** target_addr_names = NULL;
+    na_return_t ret = my_na_test_get_config(target_addr_names, NA_MY_MAX_ADDR_NAME, mpi_rank, nNode);
+    target_addrs =  (hg_addr_t**) malloc(sizeof(hg_addr_t*) * (nNode - 1));
+    for(int i = 0; i < nNode; i++) {
+        if(i == mpi_rank) continue;
+        target_addrs[i] = (hg_addr_t*) malloc(sizeof(hg_addr_t));
+        ret = HG_Addr_lookup2(hg_class, target_addr_names[i], target_addrs[i]);
+    }
     return ret;
 }
 
@@ -317,6 +387,8 @@ main(int argc, char *argv[]) {
     hg_context_t *context = HG_Context_create(hg_class);
     // Register
     my_hg_test_register(hg_class);
+    // 
+
 error:
     free(info_string);
 
