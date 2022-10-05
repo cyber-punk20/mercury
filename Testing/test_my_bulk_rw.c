@@ -56,6 +56,36 @@ typedef struct {
     hg_size_t target_offset;
     hg_bulk_t bulk_handle;
 } my_bulk_write_in_t;
+/* Define hg_proc_bulk_write_in_t */
+static HG_INLINE hg_return_t
+hg_proc_my_bulk_write_in_t(hg_proc_t proc, void *data)
+{
+    hg_return_t ret = HG_SUCCESS;
+    bulk_write_in_t *struct_data = (bulk_write_in_t *) data;
+
+    ret = hg_proc_int32_t(proc, &struct_data->fildes);
+    if (ret != HG_SUCCESS)
+        return ret;
+
+    ret = hg_proc_hg_size_t(proc, &struct_data->transfer_size);
+    if (ret != HG_SUCCESS)
+        return ret;
+
+    ret = hg_proc_hg_size_t(proc, &struct_data->origin_offset);
+    if (ret != HG_SUCCESS)
+        return ret;
+
+    ret = hg_proc_hg_size_t(proc, &struct_data->target_offset);
+    if (ret != HG_SUCCESS)
+        return ret;
+
+    ret = hg_proc_hg_bulk_t(proc, &struct_data->bulk_handle);
+    if (ret != HG_SUCCESS)
+        return ret;
+
+    return ret;
+}
+
 /* Define my_bulk_write_out_t */
 typedef struct {
     hg_size_t ret;
