@@ -2,6 +2,7 @@
 #define TEST_MY_BULK_RW_H
 #define NA_MY_MAX_ADDR_NAME 2048
 
+extern HG_PRIVATE HG_LOG_OUTLET_DECL(hg_test);
 #define HG_TEST_LOG_ERROR(...)                                                 \
     HG_LOG_WRITE(hg_test, HG_LOG_LEVEL_ERROR, __VA_ARGS__)
 #define HG_TEST_LOG_WARNING(...)                                               \
