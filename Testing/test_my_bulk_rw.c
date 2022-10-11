@@ -402,11 +402,11 @@ main(int argc, char *argv[]) {
     size_t *buf_sizes;
     size_t nbytes = test_size;
     bulk_bufs = (char **)malloc((nNode - 1) * sizeof(char));
-    HG_TEST_CHECK_ERROR(bulk_buf == NULL, done, ret, HG_NOMEM_ERROR,
+    HG_TEST_CHECK_ERROR(bulk_bufs == NULL, done, ret, HG_NOMEM_ERROR,
         "Could not allocate bulk bufs");
     for(int i = 0; i < nNode - 1; i++) {
         bulk_bufs[i] = (char *)malloc(nbytes * sizeof(char));
-        HG_TEST_CHECK_ERROR(bulk_buf[i] == NULL, done, ret, HG_NOMEM_ERROR,
+        HG_TEST_CHECK_ERROR(bulk_bufs[i] == NULL, done, ret, HG_NOMEM_ERROR,
         "Could not allocate bulk bufs[%d]", i);
     }
     for (int i = 0; i < nNode - 1; i++) {
