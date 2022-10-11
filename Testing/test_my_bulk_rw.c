@@ -460,7 +460,7 @@ main(int argc, char *argv[]) {
         
     // again:
         ret = HG_Forward(
-            handles[j], my_hg_test_perf_forward_cb, NULL, &in_struct);
+            handles[i], my_hg_test_perf_forward_cb, NULL, &in_struct);
         // if (ret == HG_AGAIN) {
         //     hg_request_wait(request, 0, NULL);
         //     goto again;
