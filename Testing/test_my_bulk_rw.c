@@ -34,7 +34,7 @@
 #endif
 
 #define MY_HG_TEST_CONFIG_FILE_NAME "/myport.cfg"
-#define TEST_BUFF_SIZE 1024 * 1024 * 1024
+#define TEST_BUFF_SIZE 1024 * 1024 * 1024 // 1GB
 
 struct my_hg_test_bulk_args {
     hg_handle_t handle;
@@ -84,7 +84,10 @@ my_bulk_read(int fildes, const void *buf, size_t offset, size_t start_value,
         HG_TEST_LOG_DEBUG("Successfully transfered %zu bytes!", nbyte);
     return nbyte;
 }
-
+static hg_return_t
+my_hg_test_perf_forward_cb(const struct hg_cb_info *callback_info) {
+    return HG_SUCCESS;
+}
 // after target pulled data
 // origin read from target and check data
 static hg_return_t
@@ -146,7 +149,7 @@ done:
 }
 
 // origin -> write rpc -> target
-// target callback
+// target runs this func
 hg_return_t my_hg_test_bulk_write_cb(hg_handle_t handle) {
     const struct hg_info *hg_info = NULL;
     hg_bulk_t origin_bulk_handle = HG_BULK_NULL;
@@ -375,6 +378,8 @@ int
 main(int argc, char *argv[]) {
     int mpi_rank, nNode;
     int test_size = TEST_BUFF_SIZE;
+    double time_read = 0, read_bandwidth;
+    double nmbytes = (double) test_size / (1024 * 1024);
     MPI_Init(NULL, NULL);
 	MPI_Comm_size(MPI_COMM_WORLD, &nNode);
 	MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank);
@@ -444,15 +449,17 @@ main(int argc, char *argv[]) {
         done, ret, "HG_Bulk_create() failed (%s)", HG_Error_to_string(ret));
 
     
-
+    hg_time_t t1, t2;
+    hg_time_get_current(&t1);
     for (int i = 0; i < nhandles; i++) {
         my_bulk_write_in_t in_struct;
         /* Fill input structure */
         in_struct.fildes = 0;
         in_struct.bulk_handle = bulk_handles[i];
+        
     // again:
         ret = HG_Forward(
-            handles[j], my_hg_test_bulk_write_cb, NULL, &in_struct);
+            handles[j], my_hg_test_perf_forward_cb, NULL, &in_struct);
         // if (ret == HG_AGAIN) {
         //     hg_request_wait(request, 0, NULL);
         //     goto again;
@@ -460,6 +467,16 @@ main(int argc, char *argv[]) {
         HG_TEST_CHECK_HG_ERROR(
             done, ret, "HG_Forward() failed (%s)", HG_Error_to_string(ret));
     }
+    hg_time_get_current(&t2);
+    time_read += hg_time_to_double(hg_time_subtract(t2, t1));
+    read_bandwidth =
+        nmbytes *
+        (double) (nhandles * nNode) /
+        time_read;
+    /* At this point we have received everything so work out the bandwidth */
+    if (mpi_rank == 0)
+        fprintf(stdout, "%-*d%*.*f", 10, (int) nbytes, NWIDTH, NDIGITS,
+            read_bandwidth);
 done:
 error:
     free(info_string);
