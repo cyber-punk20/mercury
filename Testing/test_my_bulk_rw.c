@@ -348,14 +348,15 @@ error:
 
 
 na_return_t
-my_na_test_get_target_addrs(hg_class_t* hg_class, int mpi_rank, int nNode, hg_addr_t** target_addrs) {
+my_na_test_get_target_addrs(hg_class_t* hg_class, int mpi_rank, int nNode, hg_addr_t* target_addrs) {
     char** target_addr_names = NULL;
     na_return_t ret = my_na_test_get_config(target_addr_names, NA_MY_MAX_ADDR_NAME, nNode);
-    target_addrs =  (hg_addr_t**) malloc(sizeof(hg_addr_t*) * (nNode - 1));
+    target_addrs =  (hg_addr_t*) malloc(sizeof(hg_addr_t) * (nNode - 1));
     for(int i = 0; i < nNode; i++) {
         if(i == mpi_rank) continue;
-        target_addrs[i] = (hg_addr_t*) malloc(sizeof(hg_addr_t));
-        ret = HG_Addr_lookup2(hg_class, target_addr_names[i], target_addrs[i]);
+        target_addrs[i] = (hg_addr_t) malloc(sizeof(hg_addr_t));
+        target_addrs[i] = HG_ADDR_NULL;
+        ret = HG_Addr_lookup2(hg_class, target_addr_names[i], &target_addrs[i]);
     }
     for(int i = 0; i < nNode; i++) {
         if(target_addr_names[i] != NULL) {
@@ -398,9 +399,10 @@ main(int argc, char *argv[]) {
     my_hg_test_register(hg_class);
     /* Prepare bulk_buf */
     char **bulk_bufs;
-    char ***bulk_bufs_ptr;
+    void ***bulk_bufs_ptr;
     size_t *buf_sizes;
     size_t nbytes = test_size;
+    hg_return_t ret = HG_SUCCESS;
     bulk_bufs = (char **)malloc((nNode - 1) * sizeof(char));
     HG_TEST_CHECK_ERROR(bulk_bufs == NULL, done, ret, HG_NOMEM_ERROR,
         "Could not allocate bulk bufs");
@@ -417,12 +419,12 @@ main(int argc, char *argv[]) {
     bulk_bufs_ptr = (void ***) &bulk_bufs;
     buf_sizes = &nbytes;
     /* Get target addrs */
-    hg_addr_t** target_addrs;
-    na_return_t ret = my_na_test_get_target_addrs(hg_class, mpi_rank, nNode, target_addrs);
+    hg_addr_t* target_addrs;
+    na_return_t na_ret = my_na_test_get_target_addrs(hg_class, mpi_rank, nNode, target_addrs);
     /* Create handles */
     
     int nhandles = nNode - 1;
-    handles = malloc(nhandles * sizeof(hg_handle_t));
+    hg_handle_t* handles = malloc(nhandles * sizeof(hg_handle_t));
     for (int i = 0; i < nhandles; i++) {
         ret = HG_Create(context, target_addrs[i],
             my_hg_test_bulk_write_id_g, &handles[i]);
