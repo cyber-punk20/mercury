@@ -452,7 +452,7 @@ main(int argc, char *argv[]) {
         in_struct.bulk_handle = bulk_handles[i];
     // again:
         ret = HG_Forward(
-            handles[j], hg_test_bulk_write_cb, &args, &in_struct);
+            handles[j], my_hg_test_bulk_write_cb, NULL, &in_struct);
         // if (ret == HG_AGAIN) {
         //     hg_request_wait(request, 0, NULL);
         //     goto again;
