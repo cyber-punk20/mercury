@@ -409,7 +409,7 @@ main(int argc, char *argv[]) {
         HG_TEST_CHECK_ERROR(bulk_buf[i] == NULL, done, ret, HG_NOMEM_ERROR,
         "Could not allocate bulk bufs[%d]", i);
     }
-    for (int i = 0; i < nNode - 1; i++)
+    for (int i = 0; i < nNode - 1; i++) {
         for(int j = 0; j < nbytes; j++) {
             bulk_bufs[i][j] = (char) i;
         }
