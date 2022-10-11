@@ -35,7 +35,8 @@
 
 #define MY_HG_TEST_CONFIG_FILE_NAME "/myport.cfg"
 #define TEST_BUFF_SIZE 1024 * 1024 * 1024 // 1GB
-
+#define NDIGITS 2
+#define NWIDTH  20
 struct my_hg_test_bulk_args {
     hg_handle_t handle;
     hg_size_t nbytes;
