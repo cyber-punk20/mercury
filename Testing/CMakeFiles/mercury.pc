@@ -1,0 +1,14 @@
+prefix=/usr/local
+exec_prefix=/usr/local
+libdir=/usr/local/lib
+includedir=/usr/local/include
+
+Name: mercury
+Description: RPC for High-Performance Computing
+Version: 2.2.0
+URL: http://mercury-hpc.github.io/
+Requires:
+Libs: -L${libdir} -lmercury
+Libs.private: 
+Cflags: -I${includedir} 
+Requires.private: mercury_util na

@@ -1,0 +1,13 @@
+prefix=/usr/local
+exec_prefix=/usr/local
+libdir=/usr/local/lib
+includedir=/usr/local/include
+
+Name: mercury_util
+Description: Mercury Util Library
+Version: 3.0.0
+Requires:
+Libs: -L${libdir} -lmercury_util
+Libs.private: -pthread -lrt
+Cflags: -I${includedir} 
+Requires.private: 

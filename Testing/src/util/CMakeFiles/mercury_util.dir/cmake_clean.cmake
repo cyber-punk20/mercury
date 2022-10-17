@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "../../bin/libmercury_util.a"
+  "../../bin/libmercury_util.pdb"
+  "CMakeFiles/mercury_util.dir/mercury_atomic_queue.c.o"
+  "CMakeFiles/mercury_util.dir/mercury_atomic_queue.c.o.d"
+  "CMakeFiles/mercury_util.dir/mercury_dlog.c.o"
+  "CMakeFiles/mercury_util.dir/mercury_dlog.c.o.d"
+  "CMakeFiles/mercury_util.dir/mercury_event.c.o"
+  "CMakeFiles/mercury_util.dir/mercury_event.c.o.d"
+  "CMakeFiles/mercury_util.dir/mercury_hash_table.c.o"
+  "CMakeFiles/mercury_util.dir/mercury_hash_table.c.o.d"
+  "CMakeFiles/mercury_util.dir/mercury_log.c.o"
+  "CMakeFiles/mercury_util.dir/mercury_log.c.o.d"
+  "CMakeFiles/mercury_util.dir/mercury_mem.c.o"
+  "CMakeFiles/mercury_util.dir/mercury_mem.c.o.d"
+  "CMakeFiles/mercury_util.dir/mercury_mem_pool.c.o"
+  "CMakeFiles/mercury_util.dir/mercury_mem_pool.c.o.d"
+  "CMakeFiles/mercury_util.dir/mercury_poll.c.o"
+  "CMakeFiles/mercury_util.dir/mercury_poll.c.o.d"
+  "CMakeFiles/mercury_util.dir/mercury_request.c.o"
+  "CMakeFiles/mercury_util.dir/mercury_request.c.o.d"
+  "CMakeFiles/mercury_util.dir/mercury_thread.c.o"
+  "CMakeFiles/mercury_util.dir/mercury_thread.c.o.d"
+  "CMakeFiles/mercury_util.dir/mercury_thread_condition.c.o"
+  "CMakeFiles/mercury_util.dir/mercury_thread_condition.c.o.d"
+  "CMakeFiles/mercury_util.dir/mercury_thread_mutex.c.o"
+  "CMakeFiles/mercury_util.dir/mercury_thread_mutex.c.o.d"
+  "CMakeFiles/mercury_util.dir/mercury_thread_pool.c.o"
+  "CMakeFiles/mercury_util.dir/mercury_thread_pool.c.o.d"
+  "CMakeFiles/mercury_util.dir/mercury_thread_rwlock.c.o"
+  "CMakeFiles/mercury_util.dir/mercury_thread_rwlock.c.o.d"
+  "CMakeFiles/mercury_util.dir/mercury_thread_spin.c.o"
+  "CMakeFiles/mercury_util.dir/mercury_thread_spin.c.o.d"
+  "CMakeFiles/mercury_util.dir/mercury_util.c.o"
+  "CMakeFiles/mercury_util.dir/mercury_util.c.o.d"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang C)
+  include(CMakeFiles/mercury_util.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

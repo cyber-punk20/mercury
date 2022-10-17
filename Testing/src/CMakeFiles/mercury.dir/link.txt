@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../bin/libmercury.a CMakeFiles/mercury.dir/mercury.c.o CMakeFiles/mercury.dir/mercury_bulk.c.o CMakeFiles/mercury.dir/mercury_core.c.o CMakeFiles/mercury.dir/mercury_core_header.c.o CMakeFiles/mercury.dir/mercury_header.c.o CMakeFiles/mercury.dir/mercury_proc.c.o CMakeFiles/mercury.dir/mercury_proc_bulk.c.o CMakeFiles/mercury.dir/proc_extra/mercury_proc_string.c.o CMakeFiles/mercury.dir/proc_extra/mercury_string_object.c.o
+/usr/bin/ranlib ../bin/libmercury.a

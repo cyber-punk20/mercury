@@ -1,0 +1,475 @@
+The system is: Linux - 3.10.0-1160.45.1.el7.x86_64 - x86_64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /usr/bin/cc 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/3.24.2/CompilerIdC/a.out"
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_233f3/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_233f3.dir/build.make CMakeFiles/cmTC_233f3.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o
+/usr/bin/cc   -v -o CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o -c /opt/apps/cmake/3.24.2/share/cmake-3.24/Modules/CMakeCCompilerABI.c
+Using built-in specs.
+COLLECT_GCC=/usr/bin/cc
+Target: x86_64-redhat-linux
+Configured with: ../configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-bootstrap --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-linker-hash-style=gnu --enable-languages=c,c++,objc,obj-c++,java,fortran,ada,go,lto --enable-plugin --enable-initfini-array --disable-libgcj --with-isl=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/isl-install --with-cloog=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/cloog-install --enable-gnu-indirect-function --with-tune=generic --with-arch_32=x86-64 --build=x86_64-redhat-linux
+Thread model: posix
+gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC) 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+ /usr/libexec/gcc/x86_64-redhat-linux/4.8.5/cc1 -quiet -v /opt/apps/cmake/3.24.2/share/cmake-3.24/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o -version -o /tmp/cc8bZGJD.s
+GNU C (GCC) version 4.8.5 20150623 (Red Hat 4.8.5-44) (x86_64-redhat-linux)
+	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-44), GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+ignoring nonexistent directory "/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include-fixed"
+ignoring nonexistent directory "/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../x86_64-redhat-linux/include"
+#include "..." search starts here:
+#include <...> search starts here:
+ /opt/intel/compilers_and_libraries_2020.1.217/linux/pstl/include
+ /opt/intel/compilers_and_libraries_2020.1.217/linux/daal/include
+ /opt/intel/compilers_and_libraries_2020.1.217/linux/tbb/include
+ /opt/intel/compilers_and_libraries_2020.1.217/linux/mkl/include
+ /opt/intel/compilers_and_libraries_2020.1.217/linux/ipp/include
+ /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include
+ /usr/local/include
+ /usr/include
+End of search list.
+GNU C (GCC) version 4.8.5 20150623 (Red Hat 4.8.5-44) (x86_64-redhat-linux)
+	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-44), GMP version 6.0.0, MPFR version 3.1.1, MPC version 1.0.1
+warning: GMP header version 6.0.0 differs from library version 6.1.2.
+warning: MPC header version 1.0.1 differs from library version 1.1.0.
+GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+Compiler executable checksum: 231b3394950636dbfe0428e88716bc73
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+ as -v --64 -o CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o /tmp/cc8bZGJD.s
+GNU assembler version 2.32 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.32
+COMPILER_PATH=/opt/apps/xalt/xalt/bin/:/usr/libexec/gcc/x86_64-redhat-linux/4.8.5/:/usr/libexec/gcc/x86_64-redhat-linux/4.8.5/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/4.8.5/:/usr/lib/gcc/x86_64-redhat-linux/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/4.8.5/:/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/intel/debugger_2020/libipt/intel64/lib/:/opt/intel/compilers_and_libraries_2020.1.217/linux/daal/lib/intel64_lin/:/opt/intel/compilers_and_libraries_2020.1.217/linux/tbb/lib/intel64/gcc4.8/:/opt/intel/compilers_and_libraries_2020.1.217/linux/mkl/lib/intel64_lin/:/opt/intel/compilers_and_libraries_2020.1.217/linux/ipp/lib/intel64/:/opt/intel/compilers_and_libraries_2020.1.217/linux/compiler/lib/intel64_lin/:/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64'
+Linking C executable cmTC_233f3
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_233f3.dir/link.txt --verbose=1
+/usr/bin/cc  -v -rdynamic CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o -o cmTC_233f3 
+Using built-in specs.
+COLLECT_GCC=/usr/bin/cc
+COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/4.8.5/lto-wrapper
+Target: x86_64-redhat-linux
+Configured with: ../configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-bootstrap --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-linker-hash-style=gnu --enable-languages=c,c++,objc,obj-c++,java,fortran,ada,go,lto --enable-plugin --enable-initfini-array --disable-libgcj --with-isl=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/isl-install --with-cloog=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/cloog-install --enable-gnu-indirect-function --with-tune=generic --with-arch_32=x86-64 --build=x86_64-redhat-linux
+Thread model: posix
+gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC) 
+COMPILER_PATH=/opt/apps/xalt/xalt/bin/:/usr/libexec/gcc/x86_64-redhat-linux/4.8.5/:/usr/libexec/gcc/x86_64-redhat-linux/4.8.5/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/4.8.5/:/usr/lib/gcc/x86_64-redhat-linux/
+LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/4.8.5/:/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/intel/debugger_2020/libipt/intel64/lib/:/opt/intel/compilers_and_libraries_2020.1.217/linux/daal/lib/intel64_lin/:/opt/intel/compilers_and_libraries_2020.1.217/linux/tbb/lib/intel64/gcc4.8/:/opt/intel/compilers_and_libraries_2020.1.217/linux/mkl/lib/intel64_lin/:/opt/intel/compilers_and_libraries_2020.1.217/linux/ipp/lib/intel64/:/opt/intel/compilers_and_libraries_2020.1.217/linux/compiler/lib/intel64_lin/:/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../:/lib/:/usr/lib/
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_233f3' '-mtune=generic' '-march=x86-64'
+ /usr/libexec/gcc/x86_64-redhat-linux/4.8.5/collect2 --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_233f3 /usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/4.8.5/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/4.8.5 -L/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/intel/debugger_2020/libipt/intel64/lib -L/opt/intel/compilers_and_libraries_2020.1.217/linux/daal/lib/intel64_lin -L/opt/intel/compilers_and_libraries_2020.1.217/linux/tbb/lib/intel64/gcc4.8 -L/opt/intel/compilers_and_libraries_2020.1.217/linux/mkl/lib/intel64_lin -L/opt/intel/compilers_and_libraries_2020.1.217/linux/ipp/lib/intel64 -L/opt/intel/compilers_and_libraries_2020.1.217/linux/compiler/lib/intel64_lin -L/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../.. CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-redhat-linux/4.8.5/crtend.o /usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/crtn.o
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+
+
+
+Parsed C implicit include dir info from above output: rv=done
+  found start of include info
+  found start of implicit include info
+    add: [/opt/intel/compilers_and_libraries_2020.1.217/linux/pstl/include]
+    add: [/opt/intel/compilers_and_libraries_2020.1.217/linux/daal/include]
+    add: [/opt/intel/compilers_and_libraries_2020.1.217/linux/tbb/include]
+    add: [/opt/intel/compilers_and_libraries_2020.1.217/linux/mkl/include]
+    add: [/opt/intel/compilers_and_libraries_2020.1.217/linux/ipp/include]
+    add: [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include]
+    add: [/usr/local/include]
+    add: [/usr/include]
+  end of search list found
+  collapse include dir [/opt/intel/compilers_and_libraries_2020.1.217/linux/pstl/include] ==> [/opt/intel/compilers_and_libraries_2020.1.217/linux/pstl/include]
+  collapse include dir [/opt/intel/compilers_and_libraries_2020.1.217/linux/daal/include] ==> [/opt/intel/compilers_and_libraries_2020.1.217/linux/daal/include]
+  collapse include dir [/opt/intel/compilers_and_libraries_2020.1.217/linux/tbb/include] ==> [/opt/intel/compilers_and_libraries_2020.1.217/linux/tbb/include]
+  collapse include dir [/opt/intel/compilers_and_libraries_2020.1.217/linux/mkl/include] ==> [/opt/intel/compilers_and_libraries_2020.1.217/linux/mkl/include]
+  collapse include dir [/opt/intel/compilers_and_libraries_2020.1.217/linux/ipp/include] ==> [/opt/intel/compilers_and_libraries_2020.1.217/linux/ipp/include]
+  collapse include dir [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include] ==> [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include]
+  collapse include dir [/usr/local/include] ==> [/usr/local/include]
+  collapse include dir [/usr/include] ==> [/usr/include]
+  implicit include dirs: [/opt/intel/compilers_and_libraries_2020.1.217/linux/pstl/include;/opt/intel/compilers_and_libraries_2020.1.217/linux/daal/include;/opt/intel/compilers_and_libraries_2020.1.217/linux/tbb/include;/opt/intel/compilers_and_libraries_2020.1.217/linux/mkl/include;/opt/intel/compilers_and_libraries_2020.1.217/linux/ipp/include;/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include;/usr/local/include;/usr/include]
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_233f3/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_233f3.dir/build.make CMakeFiles/cmTC_233f3.dir/build]
+  ignore line: [gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/usr/bin/cc   -v -o CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o -c /opt/apps/cmake/3.24.2/share/cmake-3.24/Modules/CMakeCCompilerABI.c]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/cc]
+  ignore line: [Target: x86_64-redhat-linux]
+  ignore line: [Configured with: ../configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-bootstrap --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-linker-hash-style=gnu --enable-languages=c c++ objc obj-c++ java fortran ada go lto --enable-plugin --enable-initfini-array --disable-libgcj --with-isl=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/isl-install --with-cloog=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/cloog-install --enable-gnu-indirect-function --with-tune=generic --with-arch_32=x86-64 --build=x86_64-redhat-linux]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC) ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [ /usr/libexec/gcc/x86_64-redhat-linux/4.8.5/cc1 -quiet -v /opt/apps/cmake/3.24.2/share/cmake-3.24/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=x86-64 -auxbase-strip CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o -version -o /tmp/cc8bZGJD.s]
+  ignore line: [GNU C (GCC) version 4.8.5 20150623 (Red Hat 4.8.5-44) (x86_64-redhat-linux)]
+  ignore line: [	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-44)  GMP version 6.0.0  MPFR version 3.1.1  MPC version 1.0.1]
+  ignore line: [warning: GMP header version 6.0.0 differs from library version 6.1.2.]
+  ignore line: [warning: MPC header version 1.0.1 differs from library version 1.1.0.]
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include-fixed"]
+  ignore line: [ignoring nonexistent directory "/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../x86_64-redhat-linux/include"]
+  ignore line: [#include "..." search starts here:]
+  ignore line: [#include <...> search starts here:]
+  ignore line: [ /opt/intel/compilers_and_libraries_2020.1.217/linux/pstl/include]
+  ignore line: [ /opt/intel/compilers_and_libraries_2020.1.217/linux/daal/include]
+  ignore line: [ /opt/intel/compilers_and_libraries_2020.1.217/linux/tbb/include]
+  ignore line: [ /opt/intel/compilers_and_libraries_2020.1.217/linux/mkl/include]
+  ignore line: [ /opt/intel/compilers_and_libraries_2020.1.217/linux/ipp/include]
+  ignore line: [ /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include]
+  ignore line: [ /usr/local/include]
+  ignore line: [ /usr/include]
+  ignore line: [End of search list.]
+  ignore line: [GNU C (GCC) version 4.8.5 20150623 (Red Hat 4.8.5-44) (x86_64-redhat-linux)]
+  ignore line: [	compiled by GNU C version 4.8.5 20150623 (Red Hat 4.8.5-44)  GMP version 6.0.0  MPFR version 3.1.1  MPC version 1.0.1]
+  ignore line: [warning: GMP header version 6.0.0 differs from library version 6.1.2.]
+  ignore line: [warning: MPC header version 1.0.1 differs from library version 1.1.0.]
+  ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+  ignore line: [Compiler executable checksum: 231b3394950636dbfe0428e88716bc73]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [ as -v --64 -o CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o /tmp/cc8bZGJD.s]
+  ignore line: [GNU assembler version 2.32 (x86_64-pc-linux-gnu) using BFD version (GNU Binutils) 2.32]
+  ignore line: [COMPILER_PATH=/opt/apps/xalt/xalt/bin/:/usr/libexec/gcc/x86_64-redhat-linux/4.8.5/:/usr/libexec/gcc/x86_64-redhat-linux/4.8.5/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/4.8.5/:/usr/lib/gcc/x86_64-redhat-linux/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/4.8.5/:/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/intel/debugger_2020/libipt/intel64/lib/:/opt/intel/compilers_and_libraries_2020.1.217/linux/daal/lib/intel64_lin/:/opt/intel/compilers_and_libraries_2020.1.217/linux/tbb/lib/intel64/gcc4.8/:/opt/intel/compilers_and_libraries_2020.1.217/linux/mkl/lib/intel64_lin/:/opt/intel/compilers_and_libraries_2020.1.217/linux/ipp/lib/intel64/:/opt/intel/compilers_and_libraries_2020.1.217/linux/compiler/lib/intel64_lin/:/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o' '-c' '-mtune=generic' '-march=x86-64']
+  ignore line: [Linking C executable cmTC_233f3]
+  ignore line: [/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_233f3.dir/link.txt --verbose=1]
+  ignore line: [/usr/bin/cc  -v -rdynamic CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o -o cmTC_233f3 ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/usr/bin/cc]
+  ignore line: [COLLECT_LTO_WRAPPER=/usr/libexec/gcc/x86_64-redhat-linux/4.8.5/lto-wrapper]
+  ignore line: [Target: x86_64-redhat-linux]
+  ignore line: [Configured with: ../configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info --with-bugurl=http://bugzilla.redhat.com/bugzilla --enable-bootstrap --enable-shared --enable-threads=posix --enable-checking=release --with-system-zlib --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --enable-linker-build-id --with-linker-hash-style=gnu --enable-languages=c c++ objc obj-c++ java fortran ada go lto --enable-plugin --enable-initfini-array --disable-libgcj --with-isl=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/isl-install --with-cloog=/builddir/build/BUILD/gcc-4.8.5-20150702/obj-x86_64-redhat-linux/cloog-install --enable-gnu-indirect-function --with-tune=generic --with-arch_32=x86-64 --build=x86_64-redhat-linux]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 4.8.5 20150623 (Red Hat 4.8.5-44) (GCC) ]
+  ignore line: [COMPILER_PATH=/opt/apps/xalt/xalt/bin/:/usr/libexec/gcc/x86_64-redhat-linux/4.8.5/:/usr/libexec/gcc/x86_64-redhat-linux/4.8.5/:/usr/libexec/gcc/x86_64-redhat-linux/:/usr/lib/gcc/x86_64-redhat-linux/4.8.5/:/usr/lib/gcc/x86_64-redhat-linux/]
+  ignore line: [LIBRARY_PATH=/usr/lib/gcc/x86_64-redhat-linux/4.8.5/:/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/:/lib/../lib64/:/usr/lib/../lib64/:/opt/intel/debugger_2020/libipt/intel64/lib/:/opt/intel/compilers_and_libraries_2020.1.217/linux/daal/lib/intel64_lin/:/opt/intel/compilers_and_libraries_2020.1.217/linux/tbb/lib/intel64/gcc4.8/:/opt/intel/compilers_and_libraries_2020.1.217/linux/mkl/lib/intel64_lin/:/opt/intel/compilers_and_libraries_2020.1.217/linux/ipp/lib/intel64/:/opt/intel/compilers_and_libraries_2020.1.217/linux/compiler/lib/intel64_lin/:/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../:/lib/:/usr/lib/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_233f3' '-mtune=generic' '-march=x86-64']
+  link line: [ /usr/libexec/gcc/x86_64-redhat-linux/4.8.5/collect2 --build-id --no-add-needed --eh-frame-hdr --hash-style=gnu -m elf_x86_64 -export-dynamic -dynamic-linker /lib64/ld-linux-x86-64.so.2 -o cmTC_233f3 /usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/crt1.o /usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/crti.o /usr/lib/gcc/x86_64-redhat-linux/4.8.5/crtbegin.o -L/usr/lib/gcc/x86_64-redhat-linux/4.8.5 -L/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/opt/intel/debugger_2020/libipt/intel64/lib -L/opt/intel/compilers_and_libraries_2020.1.217/linux/daal/lib/intel64_lin -L/opt/intel/compilers_and_libraries_2020.1.217/linux/tbb/lib/intel64/gcc4.8 -L/opt/intel/compilers_and_libraries_2020.1.217/linux/mkl/lib/intel64_lin -L/opt/intel/compilers_and_libraries_2020.1.217/linux/ipp/lib/intel64 -L/opt/intel/compilers_and_libraries_2020.1.217/linux/compiler/lib/intel64_lin -L/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../.. CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /usr/lib/gcc/x86_64-redhat-linux/4.8.5/crtend.o /usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/crtn.o]
+    arg [/usr/libexec/gcc/x86_64-redhat-linux/4.8.5/collect2] ==> ignore
+    arg [--build-id] ==> ignore
+    arg [--no-add-needed] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [--hash-style=gnu] ==> ignore
+    arg [-m] ==> ignore
+    arg [elf_x86_64] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld-linux-x86-64.so.2] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_233f3] ==> ignore
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/crt1.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/crt1.o]
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/crti.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/crti.o]
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/crtbegin.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/crtbegin.o]
+    arg [-L/usr/lib/gcc/x86_64-redhat-linux/4.8.5] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/4.8.5]
+    arg [-L/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64]
+    arg [-L/lib/../lib64] ==> dir [/lib/../lib64]
+    arg [-L/usr/lib/../lib64] ==> dir [/usr/lib/../lib64]
+    arg [-L/opt/intel/debugger_2020/libipt/intel64/lib] ==> dir [/opt/intel/debugger_2020/libipt/intel64/lib]
+    arg [-L/opt/intel/compilers_and_libraries_2020.1.217/linux/daal/lib/intel64_lin] ==> dir [/opt/intel/compilers_and_libraries_2020.1.217/linux/daal/lib/intel64_lin]
+    arg [-L/opt/intel/compilers_and_libraries_2020.1.217/linux/tbb/lib/intel64/gcc4.8] ==> dir [/opt/intel/compilers_and_libraries_2020.1.217/linux/tbb/lib/intel64/gcc4.8]
+    arg [-L/opt/intel/compilers_and_libraries_2020.1.217/linux/mkl/lib/intel64_lin] ==> dir [/opt/intel/compilers_and_libraries_2020.1.217/linux/mkl/lib/intel64_lin]
+    arg [-L/opt/intel/compilers_and_libraries_2020.1.217/linux/ipp/lib/intel64] ==> dir [/opt/intel/compilers_and_libraries_2020.1.217/linux/ipp/lib/intel64]
+    arg [-L/opt/intel/compilers_and_libraries_2020.1.217/linux/compiler/lib/intel64_lin] ==> dir [/opt/intel/compilers_and_libraries_2020.1.217/linux/compiler/lib/intel64_lin]
+    arg [-L/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../..] ==> dir [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../..]
+    arg [CMakeFiles/cmTC_233f3.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/crtend.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/crtend.o]
+    arg [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/crtn.o] ==> obj [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/crtn.o]
+  collapse obj [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/crt1.o] ==> [/usr/lib64/crt1.o]
+  collapse obj [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/crti.o] ==> [/usr/lib64/crti.o]
+  collapse obj [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64/crtn.o] ==> [/usr/lib64/crtn.o]
+  collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/4.8.5] ==> [/usr/lib/gcc/x86_64-redhat-linux/4.8.5]
+  collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../../../lib64] ==> [/usr/lib64]
+  collapse library dir [/lib/../lib64] ==> [/lib64]
+  collapse library dir [/usr/lib/../lib64] ==> [/usr/lib64]
+  collapse library dir [/opt/intel/debugger_2020/libipt/intel64/lib] ==> [/opt/intel/debugger_2020/libipt/intel64/lib]
+  collapse library dir [/opt/intel/compilers_and_libraries_2020.1.217/linux/daal/lib/intel64_lin] ==> [/opt/intel/compilers_and_libraries_2020.1.217/linux/daal/lib/intel64_lin]
+  collapse library dir [/opt/intel/compilers_and_libraries_2020.1.217/linux/tbb/lib/intel64/gcc4.8] ==> [/opt/intel/compilers_and_libraries_2020.1.217/linux/tbb/lib/intel64/gcc4.8]
+  collapse library dir [/opt/intel/compilers_and_libraries_2020.1.217/linux/mkl/lib/intel64_lin] ==> [/opt/intel/compilers_and_libraries_2020.1.217/linux/mkl/lib/intel64_lin]
+  collapse library dir [/opt/intel/compilers_and_libraries_2020.1.217/linux/ipp/lib/intel64] ==> [/opt/intel/compilers_and_libraries_2020.1.217/linux/ipp/lib/intel64]
+  collapse library dir [/opt/intel/compilers_and_libraries_2020.1.217/linux/compiler/lib/intel64_lin] ==> [/opt/intel/compilers_and_libraries_2020.1.217/linux/compiler/lib/intel64_lin]
+  collapse library dir [/usr/lib/gcc/x86_64-redhat-linux/4.8.5/../../..] ==> [/usr/lib]
+  implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
+  implicit objs: [/usr/lib64/crt1.o;/usr/lib64/crti.o;/usr/lib/gcc/x86_64-redhat-linux/4.8.5/crtbegin.o;/usr/lib/gcc/x86_64-redhat-linux/4.8.5/crtend.o;/usr/lib64/crtn.o]
+  implicit dirs: [/usr/lib/gcc/x86_64-redhat-linux/4.8.5;/usr/lib64;/lib64;/opt/intel/debugger_2020/libipt/intel64/lib;/opt/intel/compilers_and_libraries_2020.1.217/linux/daal/lib/intel64_lin;/opt/intel/compilers_and_libraries_2020.1.217/linux/tbb/lib/intel64/gcc4.8;/opt/intel/compilers_and_libraries_2020.1.217/linux/mkl/lib/intel64_lin;/opt/intel/compilers_and_libraries_2020.1.217/linux/ipp/lib/intel64;/opt/intel/compilers_and_libraries_2020.1.217/linux/compiler/lib/intel64_lin;/usr/lib]
+  implicit fwks: []
+
+
+Performing C SOURCE FILE Test HG_UTIL_HAS_ATTR_CONSTRUCTOR_PRIORITY succeeded with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_fbe00/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_fbe00.dir/build.make CMakeFiles/cmTC_fbe00.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fbe00.dir/src.c.o
+/usr/bin/cc -DHG_UTIL_HAS_ATTR_CONSTRUCTOR_PRIORITY  -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_fbe00.dir/src.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp/src.c
+/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp/src.c:2:15: warning: ‘test_constructor’ declared ‘static’ but never defined [-Wunused-function]
+   static void test_constructor(void) __attribute__((constructor(101)));
+               ^
+Linking C executable cmTC_fbe00
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fbe00.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic CMakeFiles/cmTC_fbe00.dir/src.c.o -o cmTC_fbe00 
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+
+  static void test_constructor(void) __attribute__((constructor(101)));
+  int main(void) {return 0;}
+  
+Determining if the include file sys/types.h exists passed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_36983/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_36983.dir/build.make CMakeFiles/cmTC_36983.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_36983.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_36983.dir/CheckIncludeFile.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_36983
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_36983.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic CMakeFiles/cmTC_36983.dir/CheckIncludeFile.c.o -o cmTC_36983  -pthread 
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file stdint.h exists passed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_38b8f/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_38b8f.dir/build.make CMakeFiles/cmTC_38b8f.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_38b8f.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_38b8f.dir/CheckIncludeFile.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_38b8f
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_38b8f.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic CMakeFiles/cmTC_38b8f.dir/CheckIncludeFile.c.o -o cmTC_38b8f  -pthread 
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the include file stddef.h exists passed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_cf2c6/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_cf2c6.dir/build.make CMakeFiles/cmTC_cf2c6.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_cf2c6.dir/CheckIncludeFile.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_cf2c6.dir/CheckIncludeFile.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp/CheckIncludeFile.c
+Linking C executable cmTC_cf2c6
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cf2c6.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic CMakeFiles/cmTC_cf2c6.dir/CheckIncludeFile.c.o -o cmTC_cf2c6  -pthread 
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of pthread_spinlock_t passed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_77410/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_77410.dir/build.make CMakeFiles/cmTC_77410.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_77410.dir/HG_UTIL_HAS_PTHREAD_SPINLOCK_T.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_77410.dir/HG_UTIL_HAS_PTHREAD_SPINLOCK_T.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CheckTypeSize/HG_UTIL_HAS_PTHREAD_SPINLOCK_T.c
+Linking C executable cmTC_77410
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_77410.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic CMakeFiles/cmTC_77410.dir/HG_UTIL_HAS_PTHREAD_SPINLOCK_T.c.o -o cmTC_77410  -pthread 
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of PTHREAD_MUTEX_ADAPTIVE_NP passed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_f6ffe/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_f6ffe.dir/build.make CMakeFiles/cmTC_f6ffe.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f6ffe.dir/HG_UTIL_HAS_PTHREAD_MUTEX_ADAPTIVE_NP.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_f6ffe.dir/HG_UTIL_HAS_PTHREAD_MUTEX_ADAPTIVE_NP.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CheckTypeSize/HG_UTIL_HAS_PTHREAD_MUTEX_ADAPTIVE_NP.c
+Linking C executable cmTC_f6ffe
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f6ffe.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic CMakeFiles/cmTC_f6ffe.dir/HG_UTIL_HAS_PTHREAD_MUTEX_ADAPTIVE_NP.c.o -o cmTC_f6ffe  -pthread 
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the pthread_condattr_setclock exist passed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_fdff8/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_fdff8.dir/build.make CMakeFiles/cmTC_fdff8.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fdff8.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_fdff8.dir/CheckSymbolExists.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_fdff8
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fdff8.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic CMakeFiles/cmTC_fdff8.dir/CheckSymbolExists.c.o -o cmTC_fdff8  -pthread 
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+
+
+File /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_condattr_setclock
+  return ((int*)(&pthread_condattr_setclock))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining if files time.h exist passed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_e6799/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_e6799.dir/build.make CMakeFiles/cmTC_e6799.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e6799.dir/HG_UTIL_HAS_TIME_H.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_e6799.dir/HG_UTIL_HAS_TIME_H.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CheckIncludeFiles/HG_UTIL_HAS_TIME_H.c
+Linking C executable cmTC_e6799
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e6799.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic CMakeFiles/cmTC_e6799.dir/HG_UTIL_HAS_TIME_H.c.o -o cmTC_e6799 
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the clock_gettime exist passed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_39108/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_39108.dir/build.make CMakeFiles/cmTC_39108.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_39108.dir/CheckSymbolExists.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_39108.dir/CheckSymbolExists.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_39108
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_39108.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic CMakeFiles/cmTC_39108.dir/CheckSymbolExists.c.o -o cmTC_39108 
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+
+
+File /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <time.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef clock_gettime
+  return ((int*)(&clock_gettime))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+Determining size of CLOCK_MONOTONIC_COARSE passed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_fed22/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_fed22.dir/build.make CMakeFiles/cmTC_fed22.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fed22.dir/HG_UTIL_HAS_CLOCK_MONOTONIC_COARSE.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_fed22.dir/HG_UTIL_HAS_CLOCK_MONOTONIC_COARSE.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CheckTypeSize/HG_UTIL_HAS_CLOCK_MONOTONIC_COARSE.c
+Linking C executable cmTC_fed22
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fed22.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic CMakeFiles/cmTC_fed22.dir/HG_UTIL_HAS_CLOCK_MONOTONIC_COARSE.c.o -o cmTC_fed22 
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/time.h exist passed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_51de7/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_51de7.dir/build.make CMakeFiles/cmTC_51de7.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_51de7.dir/HG_UTIL_HAS_SYSTIME_H.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_51de7.dir/HG_UTIL_HAS_SYSTIME_H.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CheckIncludeFiles/HG_UTIL_HAS_SYSTIME_H.c
+Linking C executable cmTC_51de7
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_51de7.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic CMakeFiles/cmTC_51de7.dir/HG_UTIL_HAS_SYSTIME_H.c.o -o cmTC_51de7 
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/epoll.h exist passed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_4d4b9/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_4d4b9.dir/build.make CMakeFiles/cmTC_4d4b9.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_4d4b9.dir/HG_UTIL_HAS_SYSEPOLL_H.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_4d4b9.dir/HG_UTIL_HAS_SYSEPOLL_H.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CheckIncludeFiles/HG_UTIL_HAS_SYSEPOLL_H.c
+Linking C executable cmTC_4d4b9
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_4d4b9.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic CMakeFiles/cmTC_4d4b9.dir/HG_UTIL_HAS_SYSEPOLL_H.c.o -o cmTC_4d4b9 
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/eventfd.h exist passed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_e82d1/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_e82d1.dir/build.make CMakeFiles/cmTC_e82d1.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e82d1.dir/HG_UTIL_HAS_SYSEVENTFD_H.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_e82d1.dir/HG_UTIL_HAS_SYSEVENTFD_H.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CheckIncludeFiles/HG_UTIL_HAS_SYSEVENTFD_H.c
+Linking C executable cmTC_e82d1
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e82d1.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic CMakeFiles/cmTC_e82d1.dir/HG_UTIL_HAS_SYSEVENTFD_H.c.o -o cmTC_e82d1 
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+
+
+
+Determining size of eventfd_t passed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_a1621/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_a1621.dir/build.make CMakeFiles/cmTC_a1621.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_a1621.dir/HG_UTIL_HAS_EVENTFD_T.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_a1621.dir/HG_UTIL_HAS_EVENTFD_T.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CheckTypeSize/HG_UTIL_HAS_EVENTFD_T.c
+Linking C executable cmTC_a1621
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_a1621.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic CMakeFiles/cmTC_a1621.dir/HG_UTIL_HAS_EVENTFD_T.c.o -o cmTC_a1621 
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+
+
+
+Determining if files sys/param.h exist passed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_ea5b4/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_ea5b4.dir/build.make CMakeFiles/cmTC_ea5b4.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_ea5b4.dir/HG_UTIL_HAS_SYSPARAM_H.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_ea5b4.dir/HG_UTIL_HAS_SYSPARAM_H.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CheckIncludeFiles/HG_UTIL_HAS_SYSPARAM_H.c
+Linking C executable cmTC_ea5b4
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_ea5b4.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic CMakeFiles/cmTC_ea5b4.dir/HG_UTIL_HAS_SYSPARAM_H.c.o -o cmTC_ea5b4 
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+
+
+
+Determining if the function process_vm_readv exists passed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_fab45/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_fab45.dir/build.make CMakeFiles/cmTC_fab45.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fab45.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow -DCHECK_FUNCTION_EXISTS=process_vm_readv -o CMakeFiles/cmTC_fab45.dir/CheckFunctionExists.c.o -c /opt/apps/cmake/3.24.2/share/cmake-3.24/Modules/CheckFunctionExists.c
+Linking C executable cmTC_fab45
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_fab45.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow -DCHECK_FUNCTION_EXISTS=process_vm_readv -rdynamic CMakeFiles/cmTC_fab45.dir/CheckFunctionExists.c.o -o cmTC_fab45 
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+
+
+

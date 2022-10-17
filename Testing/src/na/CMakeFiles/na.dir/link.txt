@@ -1,0 +1,2 @@
+/usr/bin/ar qc ../../bin/libna.a CMakeFiles/na.dir/na.c.o CMakeFiles/na.dir/na_ip.c.o CMakeFiles/na.dir/na_loc.c.o CMakeFiles/na.dir/na_sm.c.o
+/usr/bin/ranlib ../../bin/libna.a

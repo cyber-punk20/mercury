@@ -1,0 +1,211 @@
+Performing C SOURCE FILE Test ASAN_C_FLAG_SUPPORTED failed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_514e9/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_514e9.dir/build.make CMakeFiles/cmTC_514e9.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_514e9.dir/src.c.o
+/usr/bin/cc -DASAN_C_FLAG_SUPPORTED  -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow    -fsanitize=address -o CMakeFiles/cmTC_514e9.dir/src.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_514e9
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_514e9.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic -fsanitize=address CMakeFiles/cmTC_514e9.dir/src.c.o -o cmTC_514e9 
+/opt/apps/gcc/8.3.0/bin/ld: cannot find /usr/lib64/libasan.so.0.0.0
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [cmTC_514e9] Error 1
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+gmake: *** [cmTC_514e9/fast] Error 2
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test TSAN_C_FLAG_SUPPORTED failed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_d2d43/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_d2d43.dir/build.make CMakeFiles/cmTC_d2d43.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d2d43.dir/src.c.o
+/usr/bin/cc -DTSAN_C_FLAG_SUPPORTED  -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow    -fsanitize=thread -o CMakeFiles/cmTC_d2d43.dir/src.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_d2d43
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d2d43.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic -fsanitize=thread CMakeFiles/cmTC_d2d43.dir/src.c.o -o cmTC_d2d43 
+cc: error: -fsanitize=thread linking must be done with -pie or -shared
+gmake[1]: *** [cmTC_d2d43] Error 1
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+gmake: *** [cmTC_d2d43/fast] Error 2
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test UBSAN_C_FLAG_SUPPORTED failed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_0bbb3/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_0bbb3.dir/build.make CMakeFiles/cmTC_0bbb3.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_0bbb3.dir/src.c.o
+/usr/bin/cc -DUBSAN_C_FLAG_SUPPORTED  -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow    -fsanitize=undefined -o CMakeFiles/cmTC_0bbb3.dir/src.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp/src.c
+cc: error: unrecognized command line option '-fsanitize=undefined'
+gmake[1]: *** [CMakeFiles/cmTC_0bbb3.dir/src.c.o] Error 1
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+gmake: *** [cmTC_0bbb3/fast] Error 2
+
+
+Source file was:
+int main(void) { return 0; }
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_94d95/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_94d95.dir/build.make CMakeFiles/cmTC_94d95.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_94d95.dir/src.c.o
+/usr/bin/cc -DCMAKE_HAVE_LIBC_PTHREAD  -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_94d95.dir/src.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_94d95
+/opt/apps/cmake/3.24.2/bin/cmake -E cmake_link_script CMakeFiles/cmTC_94d95.dir/link.txt --verbose=1
+/usr/bin/cc -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -rdynamic CMakeFiles/cmTC_94d95.dir/src.c.o -o cmTC_94d95 
+/opt/apps/gcc/8.3.0/bin/ld: CMakeFiles/cmTC_94d95.dir/src.c.o: in function `main':
+src.c:(.text+0x2d): undefined reference to `pthread_create'
+/opt/apps/gcc/8.3.0/bin/ld: src.c:(.text+0x39): undefined reference to `pthread_detach'
+/opt/apps/gcc/8.3.0/bin/ld: src.c:(.text+0x45): undefined reference to `pthread_cancel'
+/opt/apps/gcc/8.3.0/bin/ld: src.c:(.text+0x56): undefined reference to `pthread_join'
+/opt/apps/gcc/8.3.0/bin/ld: src.c:(.text+0x6a): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+gmake[1]: *** [cmTC_94d95] Error 1
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+gmake: *** [cmTC_94d95/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if files sys/event.h exist failed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_73a21/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_73a21.dir/build.make CMakeFiles/cmTC_73a21.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_73a21.dir/HG_UTIL_HAS_SYSEVENT_H.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_73a21.dir/HG_UTIL_HAS_SYSEVENT_H.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CheckIncludeFiles/HG_UTIL_HAS_SYSEVENT_H.c
+/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CheckIncludeFiles/HG_UTIL_HAS_SYSEVENT_H.c:2:23: fatal error: sys/event.h: No such file or directory
+ #include <sys/event.h>
+                       ^
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_73a21.dir/HG_UTIL_HAS_SYSEVENT_H.c.o] Error 1
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+gmake: *** [cmTC_73a21/fast] Error 2
+
+
+Source:
+/* */
+#include <sys/event.h>
+
+
+int main(void){return 0;}
+
+Determining if files stdatomic.h exist failed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_fe8aa/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_fe8aa.dir/build.make CMakeFiles/cmTC_fe8aa.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_fe8aa.dir/HG_UTIL_HAS_STDATOMIC_H.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_fe8aa.dir/HG_UTIL_HAS_STDATOMIC_H.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CheckIncludeFiles/HG_UTIL_HAS_STDATOMIC_H.c
+/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CheckIncludeFiles/HG_UTIL_HAS_STDATOMIC_H.c:2:23: fatal error: stdatomic.h: No such file or directory
+ #include <stdatomic.h>
+                       ^
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_fe8aa.dir/HG_UTIL_HAS_STDATOMIC_H.c.o] Error 1
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+gmake: *** [cmTC_fe8aa/fast] Error 2
+
+
+Source:
+/* */
+#include <stdatomic.h>
+
+
+int main(void){return 0;}
+
+Determining size of atomic_long failed with the following output:
+Change Dir: /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake -f Makefile cmTC_94380/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_94380.dir/build.make CMakeFiles/cmTC_94380.dir/build
+gmake[1]: Entering directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_94380.dir/HG_UTIL_ATOMIC_LONG_WIDTH.c.o
+/usr/bin/cc   -Wall -Wextra -Winline -Wcast-qual -std=gnu99 -Wshadow  -o CMakeFiles/cmTC_94380.dir/HG_UTIL_ATOMIC_LONG_WIDTH.c.o -c /work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CheckTypeSize/HG_UTIL_ATOMIC_LONG_WIDTH.c
+/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CheckTypeSize/HG_UTIL_ATOMIC_LONG_WIDTH.c:4:23: fatal error: stdatomic.h: No such file or directory
+ #include "stdatomic.h"
+                       ^
+compilation terminated.
+gmake[1]: *** [CMakeFiles/cmTC_94380.dir/HG_UTIL_ATOMIC_LONG_WIDTH.c.o] Error 1
+gmake[1]: Leaving directory `/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CMakeTmp'
+gmake: *** [cmTC_94380/fast] Error 2
+
+
+/work2/08571/yhkan/frontera/mercury/Testing/CMakeFiles/CheckTypeSize/HG_UTIL_ATOMIC_LONG_WIDTH.c:
+#include <sys/types.h>
+#include <stdint.h>
+#include <stddef.h>
+#include "stdatomic.h"
+
+
+#undef KEY
+#if defined(__i386)
+# define KEY '_','_','i','3','8','6'
+#elif defined(__x86_64)
+# define KEY '_','_','x','8','6','_','6','4'
+#elif defined(__PPC64__)
+# define KEY '_','_','P','P','C','6','4','_','_'
+#elif defined(__ppc64__)
+# define KEY '_','_','p','p','c','6','4','_','_'
+#elif defined(__PPC__)
+# define KEY '_','_','P','P','C','_','_'
+#elif defined(__ppc__)
+# define KEY '_','_','p','p','c','_','_'
+#elif defined(__aarch64__)
+# define KEY '_','_','a','a','r','c','h','6','4','_','_'
+#elif defined(__ARM_ARCH_7A__)
+# define KEY '_','_','A','R','M','_','A','R','C','H','_','7','A','_','_'
+#elif defined(__ARM_ARCH_7S__)
+# define KEY '_','_','A','R','M','_','A','R','C','H','_','7','S','_','_'
+#endif
+
+#define SIZE (sizeof(atomic_long))
+static char info_size[] =  {'I', 'N', 'F', 'O', ':', 's','i','z','e','[',
+  ('0' + ((SIZE / 10000)%10)),
+  ('0' + ((SIZE / 1000)%10)),
+  ('0' + ((SIZE / 100)%10)),
+  ('0' + ((SIZE / 10)%10)),
+  ('0' +  (SIZE    % 10)),
+  ']',
+#ifdef KEY
+  ' ','k','e','y','[', KEY, ']',
+#endif
+  '\0'};
+
+#ifdef __CLASSIC_C__
+int main(argc, argv) int argc; char *argv[];
+#else
+int main(int argc, char *argv[])
+#endif
+{
+  int require = 0;
+  require += info_size[argc];
+  (void)argv;
+  return require;
+}
+
+

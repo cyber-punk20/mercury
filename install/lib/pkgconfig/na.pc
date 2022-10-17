@@ -1,0 +1,13 @@
+prefix=/work2/08571/yhkan/frontera/mercury/install
+exec_prefix=/work2/08571/yhkan/frontera/mercury/install
+libdir=/work2/08571/yhkan/frontera/mercury/install/lib
+includedir=/work2/08571/yhkan/frontera/mercury/install/include
+
+Name: na
+Description: Mercury Network Abstraction (NA) Library
+Version: 3.0.0
+Requires:
+Libs: -L${libdir} -lna
+Libs.private: -L/work2/08571/yhkan/frontera/mercury/libfabric-1.15.2/install/lib -lfabric
+Cflags: -I${includedir} 
+Requires.private: mercury_util
