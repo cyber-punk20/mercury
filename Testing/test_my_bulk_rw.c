@@ -49,9 +49,9 @@ struct my_hg_test_bulk_args {
 };
 
 int mpi_rank, nNode;
-// pthread_cond_t done_cond = PTHREAD_COND_INITIALIZER;
-// pthread_mutex_t done_mutex = PTHREAD_MUTEX_INITIALIZER;
-// int done = 0;
+pthread_cond_t done_cond = PTHREAD_COND_INITIALIZER;
+pthread_mutex_t done_mutex = PTHREAD_MUTEX_INITIALIZER;
+int done = 0;
 /* test_bulk */
 hg_id_t my_hg_test_bulk_write_id_g = 0;
 
@@ -90,6 +90,31 @@ my_bulk_read(int fildes, const void *buf, size_t offset, size_t start_value,
     return nbyte;
 }
 
+
+/* dedicated thread function to drive Mercury progress */
+static pthread_t hg_progress_tid;
+bool hg_progress_shutdown_flag = false;
+static void *
+hg_progress_fn(hg_context_t *hg_context)
+{
+    // fprintf(stdout, "rank %d: hg_progress_fn\n", mpi_rank);
+    hg_return_t ret;
+    unsigned int actual_count;
+    
+    while (!hg_progress_shutdown_flag) {
+        do {
+            ret = HG_Trigger(hg_context, 0, 1, &actual_count);
+            // fprintf(stdout, "rank %d: hg_progress_fn(HG_Trigger)\n", mpi_rank);
+        } while (
+            (ret == HG_SUCCESS) && actual_count && !hg_progress_shutdown_flag);
+
+        if (!hg_progress_shutdown_flag)
+            HG_Progress(hg_context, 100);
+    }
+
+    return (NULL);
+}
+
 struct my_hg_test_perf_args {
     hg_request_t *request;
     unsigned int op_count;
@@ -98,18 +123,19 @@ struct my_hg_test_perf_args {
 
 static hg_return_t
 my_hg_test_perf_forward_cb(const struct hg_cb_info *callback_info) {
+    
+    // fprintf(stdout, "rank %d: my_hg_test_perf_forward_cb", mpi_rank);
     // struct my_hg_test_perf_args *args =
     //     (struct my_hg_test_perf_args *) callback_info->arg;
-    fprintf(stdout, "rank %d: my_hg_test_perf_forward_cb", mpi_rank);
     // if ((unsigned int) hg_atomic_incr32(&args->op_completed_count) ==
     //     args->op_count) {
     //     fprintf(stdout, "rank %d: my_hg_test_perf_forward_cb, request complete\n", mpi_rank);
     //     hg_request_complete(args->request);
     // }
-    // pthread_mutex_lock(&done_mutex);
-    // done++;
-    // pthread_cond_signal(&done_cond);
-    // pthread_mutex_unlock(&done_mutex);
+    pthread_mutex_lock(&done_mutex);
+    done++;
+    pthread_cond_signal(&done_cond);
+    pthread_mutex_unlock(&done_mutex);
         
 
     return HG_SUCCESS;
@@ -119,7 +145,7 @@ my_hg_test_perf_forward_cb(const struct hg_cb_info *callback_info) {
 static hg_return_t
 my_hg_test_bulk_transfer_cb(const struct hg_cb_info *hg_cb_info)
 {
-    fprintf(stdout, "rank %d: Origin call my_hg_test_bulk_transfer_cb\n", mpi_rank);
+    // fprintf(stdout, "rank %d: Origin call my_hg_test_bulk_transfer_cb\n", mpi_rank);
     struct my_hg_test_bulk_args *bulk_args =
         (struct my_hg_test_bulk_args *) hg_cb_info->arg;
     hg_bulk_t local_bulk_handle = hg_cb_info->info.bulk.local_handle;
@@ -178,7 +204,7 @@ done:
 // origin -> write rpc -> target
 // target runs this func
 hg_return_t my_hg_test_bulk_write_cb(hg_handle_t handle) {
-    fprintf(stdout, "Target calls my_hg_test_bulk_write_cb\n");
+    // fprintf(stdout, "Target calls my_hg_test_bulk_write_cb\n");
     const struct hg_info *hg_info = NULL;
     hg_bulk_t origin_bulk_handle = HG_BULK_NULL;
     hg_bulk_t local_bulk_handle = HG_BULK_NULL;
@@ -240,7 +266,7 @@ hg_return_t my_hg_test_bulk_write_cb(hg_handle_t handle) {
         bulk_args, HG_BULK_PULL, hg_info->addr, hg_info->context_id,
         origin_bulk_handle, bulk_args->origin_offset, local_bulk_handle,
         bulk_args->target_offset, bulk_args->transfer_size, &hg_bulk_op_id);
-    printf("HG_Bulk_transfer_id finished (%s)\n", HG_Error_to_string(ret));
+    // printf("HG_Bulk_transfer_id finished (%s)\n", HG_Error_to_string(ret));
     HG_TEST_CHECK_HG_ERROR(error, ret, "HG_Bulk_transfer_id() failed (%s)",
         HG_Error_to_string(ret));
     
@@ -251,7 +277,7 @@ hg_return_t my_hg_test_bulk_write_cb(hg_handle_t handle) {
         HG_TEST_CHECK_HG_ERROR(error, ret, "HG_Bulk_cancel() failed (%s)",
             HG_Error_to_string(ret));
     }
-    printf("rank %d: Pull bulk data finished: %s\n", mpi_rank, HG_Error_to_string(ret));
+    // printf("rank %d: Pull bulk data finished: %s\n", mpi_rank, HG_Error_to_string(ret));
     return ret;
 
 error:
@@ -269,7 +295,14 @@ my_hg_test_register(hg_class_t *hg_class) {
         my_bulk_write_in_t, my_bulk_write_out_t, my_hg_test_bulk_write_cb);
     // printf("my_hg_test_bulk_write_id_g: %d\n", my_hg_test_bulk_write_id_g);
 }
+void clear_config() {
+    FILE *config = NULL;
+    hg_return_t ret;
 
+    config = fopen(
+        HG_TEST_TEMP_DIRECTORY MY_HG_TEST_CONFIG_FILE_NAME, "w");
+     fclose(config);
+}
 hg_return_t
 my_na_test_set_config(const char *addr_name, bool append)
 {
@@ -422,7 +455,7 @@ my_na_test_get_target_addrs(hg_class_t* hg_class, int mpi_rank, int nNode, hg_ad
 static int
 my_hg_test_request_progress(unsigned int timeout, void *arg)
 {
-    // printf("rank %d: my_hg_test_request_progress\n", mpi_rank);
+    printf("rank %d: my_hg_test_request_progress\n", mpi_rank);
     if (HG_Progress((hg_context_t *) arg, timeout) != HG_SUCCESS)
         return HG_UTIL_FAIL;
 
@@ -456,6 +489,11 @@ main(int argc, char *argv[]) {
     MPI_Init(NULL, NULL);
 	MPI_Comm_size(MPI_COMM_WORLD, &nNode);
 	MPI_Comm_rank(MPI_COMM_WORLD, &mpi_rank);
+    // delete myport.cfg
+    if(mpi_rank == 0) {
+        clear_config();
+    }
+    MPI_Barrier(MPI_COMM_WORLD);
     // Initialization
     struct hg_init_info hg_init_info = HG_INIT_INFO_INITIALIZER;
     // NA intialization (na_test.c)
@@ -472,6 +510,9 @@ main(int argc, char *argv[]) {
     // HG intialization (mercury_test.c)
     hg_class_t * hg_class = HG_Init_opt(NULL, true, &hg_init_info);
     hg_context_t *context = HG_Context_create(hg_class);
+    /* start up thread to drive progress */
+    int thread_ret = pthread_create(&hg_progress_tid, NULL, hg_progress_fn, context);
+    
     my_na_test_self_addr_publish(hg_class, true, mpi_rank);
     MPI_Barrier(MPI_COMM_WORLD);
     // Register
@@ -485,7 +526,7 @@ main(int argc, char *argv[]) {
     bulk_bufs = (char **)malloc((nNode - 1) * sizeof(char));
     HG_TEST_CHECK_ERROR(bulk_bufs == NULL, done, ret, HG_NOMEM_ERROR,
         "Could not allocate bulk bufs");
-    fprintf(stdout, "rank %d: Begin bulk buffer initialization\n", mpi_rank);
+    // fprintf(stdout, "rank %d: Begin bulk buffer initialization\n", mpi_rank);
     for(int i = 0; i < nNode - 1; i++) {
         bulk_bufs[i] = (char *)malloc(nbytes * sizeof(char));
         HG_TEST_CHECK_ERROR(bulk_bufs[i] == NULL, done, ret, HG_NOMEM_ERROR,
@@ -497,7 +538,7 @@ main(int argc, char *argv[]) {
             bulk_bufs[i][j] = (char) i;
         }
     }
-    fprintf(stdout, "rank %d: Finish bulk buffer initialization\n", mpi_rank);
+    // fprintf(stdout, "rank %d: Finish bulk buffer initialization\n", mpi_rank);
     // bulk_bufs_ptr = (void ***) &bulk_bufs;
     buf_sizes = &nbytes;
     /* Get target addrs */
@@ -530,16 +571,16 @@ main(int argc, char *argv[]) {
         done, ret, "HG_Bulk_create() failed (%s)", HG_Error_to_string(ret));
     
     /* Create request class*/
-    hg_request_class_t *request_class = hg_request_init(my_hg_test_request_progress,
-        my_hg_test_request_trigger, context);
-    HG_TEST_CHECK_ERROR(request_class == NULL, done, ret,
-        HG_FAULT, "Could not create request class");
-    hg_request_t *request;
-    request = hg_request_create(request_class);
-    struct my_hg_test_perf_args args;
-    hg_atomic_init32(&args.op_completed_count, 0);
-    args.op_count = nhandles;
-    args.request = request;
+    // hg_request_class_t *request_class = hg_request_init(my_hg_test_request_progress,
+    //     my_hg_test_request_trigger, context);
+    // HG_TEST_CHECK_ERROR(request_class == NULL, done, ret,
+    //     HG_FAULT, "Could not create request class");
+    // hg_request_t *request;
+    // request = hg_request_create(request_class);
+    // struct my_hg_test_perf_args args;
+    // hg_atomic_init32(&args.op_completed_count, 0);
+    // args.op_count = nhandles;
+    // args.request = request;
 
     MPI_Barrier(MPI_COMM_WORLD);
     hg_time_t t1, t2;
@@ -553,27 +594,28 @@ main(int argc, char *argv[]) {
         in_struct.origin_offset = 0;
         in_struct.target_offset = 0;
         
-    again:
-        ret = HG_Forward(
-            handles[i], my_hg_test_perf_forward_cb, &args, &in_struct);
+    // again:
         // ret = HG_Forward(
-        //     handles[i], my_hg_test_perf_forward_cb, NULL, &in_struct);
-        if (ret == HG_AGAIN) {
-            hg_request_wait(request, 0, NULL);
-            goto again;
-        }
-        fprintf(stdout, "rank %d: HG_Forward %d result: %s\n", mpi_rank, i, HG_Error_to_string(ret));
+        //     handles[i], my_hg_test_perf_forward_cb, &args, &in_struct);
+        ret = HG_Forward(
+            handles[i], my_hg_test_perf_forward_cb, NULL, &in_struct);
+        // if (ret == HG_AGAIN) {
+        //     hg_request_wait(request, 0, NULL);
+        //     goto again;
+        // }
+        // fprintf(stdout, "rank %d: HG_Forward %d result: %s\n", mpi_rank, i, HG_Error_to_string(ret));
         HG_TEST_CHECK_HG_ERROR(
             done, ret, "HG_Forward() failed (%s)", HG_Error_to_string(ret));
     }
-    hg_request_wait(request, HG_MAX_IDLE_TIME, NULL);
+    // hg_request_wait(request, HG_MAX_IDLE_TIME, NULL);
+    // fprintf(stdout, "rank %d: Wait for async calls to be finished\n", mpi_rank);
     /* wait for callbacks to finish */
-    // pthread_mutex_lock(&done_mutex);
-    // while (done < nNode - 1) {
-    //     pthread_cond_wait(&done_cond, &done_mutex);
-    // }
+    pthread_mutex_lock(&done_mutex);
+    while (done < nNode - 1) {
+        pthread_cond_wait(&done_cond, &done_mutex);
+    }
         
-    // pthread_mutex_unlock(&done_mutex);
+    pthread_mutex_unlock(&done_mutex);
     MPI_Barrier(MPI_COMM_WORLD);
     hg_time_get_current(&t2);
     time_read += hg_time_to_double(hg_time_subtract(t2, t1));
@@ -590,6 +632,7 @@ main(int argc, char *argv[]) {
     }
     
 done:
+    hg_progress_shutdown_flag = true;
 error:
     free(info_string);
 
