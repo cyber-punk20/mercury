@@ -35,7 +35,8 @@
 #endif
 
 #define MY_HG_TEST_CONFIG_FILE_NAME "/myport.cfg"
-#define TEST_BUFF_SIZE 1024 * 1024 * 1024 // 1GB
+#define LOOP_NUM 10
+#define TEST_BUFF_SIZE 1024 * 1024 * 1024 // 10MB
 #define NDIGITS 2
 #define NWIDTH  20
 struct my_hg_test_bulk_args {
@@ -60,6 +61,7 @@ static HG_INLINE size_t
 my_bulk_read(int fildes, const void *buf, size_t offset, size_t start_value,
     size_t nbyte, int verbose)
 {
+    // fprintf(stdout,  "Origin call my_bulk_read\n");
     size_t i;
     int error = 0;
     const char *buf_ptr = (const char *) buf;
@@ -80,13 +82,17 @@ my_bulk_read(int fildes, const void *buf, size_t offset, size_t start_value,
     //         HG_TEST_LOG_ERROR("Error detected in bulk transfer, buf[%zu] = %d, "
     //                           "was expecting %d!\n",
     //             i, (char) buf_ptr[i], (char) (i + start_value));
+    //         // fprintf(stdout, "Error %d\n", i);
     //         error = 1;
     //         nbyte = 0;
     //         break;
     //     }
     // }
-    if (!error && verbose)
-        HG_TEST_LOG_DEBUG("Successfully transfered %zu bytes!", nbyte);
+    // if (!error && verbose) {
+    //     HG_TEST_LOG_DEBUG("Successfully transfered %zu bytes!", nbyte);
+    //     // fprintf(stdout,  "Successfully transfered %zu bytes!\n", nbyte);
+    // }
+        
     return nbyte;
 }
 
@@ -145,7 +151,7 @@ my_hg_test_perf_forward_cb(const struct hg_cb_info *callback_info) {
 static hg_return_t
 my_hg_test_bulk_transfer_cb(const struct hg_cb_info *hg_cb_info)
 {
-    // fprintf(stdout, "rank %d: Origin call my_hg_test_bulk_transfer_cb\n", mpi_rank);
+    //fprintf(stdout, "rank %d: Origin call my_hg_test_bulk_transfer_cb\n", mpi_rank);
     struct my_hg_test_bulk_args *bulk_args =
         (struct my_hg_test_bulk_args *) hg_cb_info->arg;
     hg_bulk_t local_bulk_handle = hg_cb_info->info.bulk.local_handle;
@@ -523,7 +529,7 @@ main(int argc, char *argv[]) {
     size_t *buf_sizes;
     size_t nbytes = test_size;
     hg_return_t ret = HG_SUCCESS;
-    bulk_bufs = (char **)malloc((nNode - 1) * sizeof(char));
+    bulk_bufs = (char **)malloc((nNode - 1) * sizeof(char*));
     HG_TEST_CHECK_ERROR(bulk_bufs == NULL, done, ret, HG_NOMEM_ERROR,
         "Could not allocate bulk bufs");
     // fprintf(stdout, "rank %d: Begin bulk buffer initialization\n", mpi_rank);
@@ -535,7 +541,7 @@ main(int argc, char *argv[]) {
     
     for (int i = 0; i < nNode - 1; i++) {
         for(int j = 0; j < nbytes; j++) {
-            bulk_bufs[i][j] = (char) i;
+            bulk_bufs[i][j] = (char) j;
         }
     }
     // fprintf(stdout, "rank %d: Finish bulk buffer initialization\n", mpi_rank);
