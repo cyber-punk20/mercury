@@ -5,7 +5,7 @@
 
 /* visible API for example RPC operation */
 
-#define BULK_TRANSFER_SIZE 512 * 1024
+#define BULK_TRANSFER_SIZE 2048 * 1024
 
 MERCURY_GEN_PROC(my_rpc_out_t, ((int32_t)(ret)))
 MERCURY_GEN_PROC(my_rpc_in_t, ((int32_t)(input_val))((hg_bulk_t)(bulk_handle)))
