@@ -1,4 +1,3 @@
-#include "rpc_engine.h"
 #include "rpc.h"
 #include "test_my_rpc_client.h"
 
@@ -74,7 +73,7 @@ error:
 }
 
 hg_return_t
-get_config(char addr_strings[][ADDR_BUF_SIZE]) {
+get_config(char* addr_strings) {
     FILE *config = NULL;
     hg_return_t ret;
     ssize_t read;
@@ -84,6 +83,7 @@ get_config(char addr_strings[][ADDR_BUF_SIZE]) {
         "Could not open config file from: %s",
         HG_TEST_TEMP_DIRECTORY MY_HG_TEST_CONFIG_FILE_NAME);
     size_t len = ADDR_BUF_SIZE;
+    char tmp_addr_string[ADDR_BUF_SIZE];
     for(int i = 0; i < nNode; i++) {
         char* line = NULL;
         read = getline(&line, &len, config);
@@ -92,11 +92,11 @@ get_config(char addr_strings[][ADDR_BUF_SIZE]) {
         "Could not retrieve config name");
         HG_TEST_CHECK_ERROR_NORET(line == NULL, error, "Could not allocate line");
         int rank = 0;
-        sscanf(line, "%d#%s", &rank, addr_strings[rank]);
+        sscanf(line, "%d#%s", &rank, tmp_addr_string);
         /* This prevents retaining the newline, if any */
         // addr_name[strlen(addr_name) - 1] = '\0';
         // addr_strings[rank][strlen(addr_strings[rank])] = '\0';
-        fprintf(stdout, "get_config %d#%s\n", rank, addr_strings[rank]);
+        strcpy(addr_strings + rank * ADDR_BUF_SIZE, tmp_addr_string);
         free(line);
     }
     fclose(config);
@@ -108,15 +108,14 @@ error:
 static void
 run_my_rpc(const char *svr_addr_string, int value)
 {
+    
     hg_addr_t svr_addr;
     my_rpc_in_t in;
     const struct hg_info *hgi;
     int ret;
     struct my_rpc_state *my_rpc_state_p;
-
     /* address lookup. */
     hg_engine_addr_lookup(svr_addr_string, &svr_addr);
-
     /* set up state structure */
     my_rpc_state_p = malloc(sizeof(*my_rpc_state_p));
     my_rpc_state_p->size = BULK_TRANSFER_SIZE;
@@ -184,6 +183,9 @@ my_rpc_cb(const struct hg_cb_info *info)
 }
 
 
+
+
+
 int
 main() {
     const char* local_addr_string = "ofi+verbs://";
@@ -219,22 +221,24 @@ main() {
     // register function
     my_rpc_id = my_rpc_register();
     // get addresses of other nodes
-    char addr_strings[nNode][ADDR_BUF_SIZE];
+    char* addr_strings = (char *)malloc(sizeof(char) * nNode * ADDR_BUF_SIZE);
     get_config(addr_strings);
     hg_time_t t1, t2;
     hg_time_get_current(&t1);
     for(int i = 0; i < LOOP_NUM; i++) {
         for(int j = 0; j < nNode; j++) {
             if(j == mpi_rank) continue;
-            run_my_rpc(addr_strings[j], i);
+            run_my_rpc(addr_strings + j * ADDR_BUF_SIZE, i);
         }
     }
+    
     pthread_mutex_lock(&done_mutex);
     while (done < (nNode - 1) * LOOP_NUM) {
         pthread_cond_wait(&done_cond, &done_mutex);
     }
         
     pthread_mutex_unlock(&done_mutex);
+    free(addr_strings);
     MPI_Barrier(MPI_COMM_WORLD);
     hg_time_get_current(&t2);
     double time_read = hg_time_to_double(hg_time_subtract(t2, t1));
@@ -249,7 +253,7 @@ main() {
         fprintf(stdout, "%-*d%*.*f\n", 10, (int) BULK_TRANSFER_SIZE, NWIDTH, NDIGITS,
             read_bandwidth);
     }
-    hg_progress_shutdown_flag = true;
+    hg_engine_finalize();
     MPI_Barrier(MPI_COMM_WORLD);
     return NULL;
 }

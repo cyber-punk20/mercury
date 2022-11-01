@@ -106,7 +106,6 @@ void
 hg_engine_addr_lookup(const char *name, hg_addr_t *addr)
 {
     hg_return_t ret;
-
     ret = HG_Addr_lookup2(hg_class, name, addr);
     assert(ret == HG_SUCCESS);
     (void) ret;

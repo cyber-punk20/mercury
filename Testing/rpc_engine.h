@@ -4,6 +4,7 @@
 
 #ifndef RPC_ENGINE_H
 #define RPC_ENGINE_H
+
 void
 hg_engine_init(hg_bool_t listen, const char *local_addr);
 void
