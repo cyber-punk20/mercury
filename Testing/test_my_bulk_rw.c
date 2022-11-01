@@ -61,7 +61,7 @@ static HG_INLINE size_t
 my_bulk_read(int fildes, const void *buf, size_t offset, size_t start_value,
     size_t nbyte, int verbose)
 {
-    // fprintf(stdout,  "Origin call my_bulk_read\n");
+    fprintf(stdout,  "Origin call my_bulk_read\n");
     size_t i;
     int error = 0;
     const char *buf_ptr = (const char *) buf;
@@ -77,21 +77,21 @@ my_bulk_read(int fildes, const void *buf, size_t offset, size_t start_value,
         HG_TEST_LOG_DEBUG("Checking data...");
 
     /* Check bulk buf */
-    // for (i = offset; i < nbyte + offset; i++) {
-    //     if (buf_ptr[i] != (char) (i + start_value)) {
-    //         HG_TEST_LOG_ERROR("Error detected in bulk transfer, buf[%zu] = %d, "
-    //                           "was expecting %d!\n",
-    //             i, (char) buf_ptr[i], (char) (i + start_value));
-    //         // fprintf(stdout, "Error %d\n", i);
-    //         error = 1;
-    //         nbyte = 0;
-    //         break;
-    //     }
-    // }
-    // if (!error && verbose) {
-    //     HG_TEST_LOG_DEBUG("Successfully transfered %zu bytes!", nbyte);
-    //     // fprintf(stdout,  "Successfully transfered %zu bytes!\n", nbyte);
-    // }
+    for (i = offset; i < nbyte + offset; i++) {
+        if (buf_ptr[i] != (char) (i + start_value)) {
+            HG_TEST_LOG_ERROR("Error detected in bulk transfer, buf[%zu] = %d, "
+                              "was expecting %d!\n",
+                i, (char) buf_ptr[i], (char) (i + start_value));
+            // fprintf(stdout, "Error %d\n", i);
+            error = 1;
+            nbyte = 0;
+            break;
+        }
+    }
+    if (!error && verbose) {
+        HG_TEST_LOG_DEBUG("Successfully transfered %zu bytes!", nbyte);
+        fprintf(stdout,  "Successfully transfered %zu bytes!\n", nbyte);
+    }
         
     return nbyte;
 }

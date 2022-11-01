@@ -129,6 +129,7 @@ configure_file(
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
   ${CMAKE_CURRENT_BINARY_DIR}
+
 )
 
 if(MERCURY_TESTING_ENABLE_PARALLEL)
@@ -159,6 +160,8 @@ function(build_mercury_test test_name)
     set_coverage_flags(hg_test_${test_name})
   endif()
 endfunction()
+
+
 
 macro(add_mercury_test test_name comm protocol busy parallel self scalable
   ignore_server_err)
@@ -349,6 +352,8 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/util)
 set(MERCURY_TEST_SRCS
   ${CMAKE_CURRENT_SOURCE_DIR}/mercury_test.c
   ${CMAKE_CURRENT_SOURCE_DIR}/mercury_rpc_cb.c
+  ${CMAKE_CURRENT_SOURCE_DIR}/rpc_engine.c
+  ${CMAKE_CURRENT_SOURCE_DIR}/rpc.c
 )
 
 if(NA_OFI_TESTING_USE_CRAY_DRC)
@@ -392,6 +397,7 @@ build_mercury_test(kill)
 
 # my tests
 build_mercury_test(my_bulk_rw)
+build_mercury_test(my_rpc_client)
 
 # Cray DRC test
 if(NA_OFI_TESTING_USE_CRAY_DRC)
