@@ -24,7 +24,7 @@ set(MERCURY_USE_SYSTEM_MCHECKSUM )
 set(MERCURY_VERSION_MAJOR   2)
 set(MERCURY_VERSION_MINOR   2)
 set(MERCURY_VERSION_PATCH   0)
-set(MERCURY_VERSION_FULL    2.2.0-47-g2d04ec3)
+set(MERCURY_VERSION_FULL    2.2.0-51-g18ee9d4)
 set(MERCURY_VERSION         2.2)
 
 #-----------------------------------------------------------------------------

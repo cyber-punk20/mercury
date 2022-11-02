@@ -84,11 +84,11 @@ my_rpc_handler_bulk_cb(const struct hg_cb_info *info)
     ret = HG_Respond(my_rpc_state_p->handle, NULL, NULL, &out);
     assert(ret == HG_SUCCESS);
     (void) ret;
-    // HG_Free_Input(my_rpc_state_p->handle, &my_rpc_state_p->in);
+    HG_Free_input(my_rpc_state_p->handle, &my_rpc_state_p->in);
     HG_Bulk_free(my_rpc_state_p->bulk_handle);
     HG_Destroy(my_rpc_state_p->handle);
     free(my_rpc_state_p->buffer);
     free(my_rpc_state_p);
 
-    return;
+    return HG_SUCCESS;
 }

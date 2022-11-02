@@ -28,7 +28,7 @@ static int done = 0;
 static pthread_cond_t done_cond = PTHREAD_COND_INITIALIZER;
 static pthread_mutex_t done_mutex = PTHREAD_MUTEX_INITIALIZER;
 
-#define LOOP_NUM 100
+#define LOOP_NUM 5
 
 #define ADDR_BUF_SIZE 64
 #define ADDR_TOTAL_SIZE 96
